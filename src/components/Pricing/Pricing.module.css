@@ -1,0 +1,289 @@
+/* Pricing Section - Premium Redesign */
+.pricingSection {
+    padding: 6rem 1rem;
+    /* Mobile first */
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] .pricingSection {
+    background: #111;
+    /* Dark bg for section */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: #444;
+    margin-top: 1rem;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+[data-theme='dark'] .subtitle {
+    color: #aaa;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 4rem;
+    width: 100%;
+}
+
+/* Card Styles */
+.card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    isolation: isolate;
+}
+
+[data-theme='dark'] .card {
+    background: #1a1a1a;
+    /* Dark card bg */
+    border-color: #333;
+}
+
+/* Hover Effect */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: #111;
+    z-index: 2;
+}
+
+[data-theme='dark'] .card:hover {
+    border-color: #fff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Highlighted Card (Most Popular) */
+.card.highlighted {
+    border-color: #111;
+    background: #fafafa;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .card.highlighted {
+    background: #222;
+    border-color: #fff;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.05);
+}
+
+/* Card Header */
+.cardHeader {
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 2rem;
+}
+
+[data-theme='dark'] .cardHeader {
+    border-bottom-color: #333;
+}
+
+.planTitle {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+[data-theme='dark'] .planTitle {
+    color: #fff;
+}
+
+.planPrice {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: #111;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+[data-theme='dark'] .planPrice {
+    color: #fff;
+}
+
+.planDesc {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+[data-theme='dark'] .planDesc {
+    color: #aaa;
+}
+
+/* Features List */
+.featuresList {
+    list-style: none;
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: #333;
+    font-weight: 500;
+}
+
+[data-theme='dark'] .featureItem {
+    color: #ccc;
+}
+
+.checkIcon {
+    width: 20px;
+    height: 20px;
+    color: #111;
+    /* Black checkmarks for premium feel */
+    flex-shrink: 0;
+    background: #f0f0f0;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+[data-theme='dark'] .checkIcon {
+    background: #333;
+    color: #fff;
+}
+
+/* CTA Button */
+.ctaButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid #111;
+    color: #111;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 50px;
+    /* Pill shape */
+    transition: all 0.3s ease;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme='dark'] .ctaButton {
+    border-color: #fff;
+    color: #fff;
+}
+
+/* Button Hover - Fill effect */
+.ctaButton:hover {
+    background: #111;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .ctaButton:hover {
+    background: #fff;
+    color: #000;
+}
+
+.card.highlighted .ctaButton {
+    background: #111;
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .card.highlighted .ctaButton {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.card.highlighted .ctaButton:hover {
+    background: #333;
+    border-color: #333;
+    transform: translateY(-2px);
+}
+
+[data-theme='dark'] .card.highlighted .ctaButton:hover {
+    background: #ccc;
+    border-color: #ccc;
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+    .pricingSection {
+        padding: 8rem 2rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .pricingSection {
+        padding: 10rem 4rem;
+    }
+
+    .container {
+        padding: 0 2rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 columns */
+        gap: 2rem;
+        align-items: start;
+        /* Align top */
+    }
+
+    /* Make highlighted card slightly larger on desktop */
+    .card.highlighted {
+        transform: scale(1.05);
+        z-index: 1;
+        border-width: 2px;
+    }
+
+    .card.highlighted:hover {
+        transform: scale(1.05) translateY(-10px);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .card,
+    .ctaButton {
+        transition: none;
+        transform: none !important;
+    }
+}

@@ -1,0 +1,285 @@
+/* Hero Section - Clean & Bold with Particle Animation */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    background: #ffffff;
+    overflow: hidden;
+    padding-top: 100px;
+    transition: background-color 0.3s ease;
+}
+
+[data-theme='dark'] .hero {
+    background: #000000;
+}
+
+[data-theme='dark'] .heroCanvas {
+    opacity: 0.8;
+}
+
+.heroCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    will-change: contents;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 1.5rem;
+    opacity: 0;
+    animation: heroFadeIn 1s ease-out 0.2s forwards;
+}
+
+@keyframes heroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título Principal */
+.heroTitle {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #111;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+    transition: color 0.3s ease;
+}
+
+[data-theme='dark'] .heroTitle {
+    color: #f0f0f0;
+    /* Off-white */
+}
+
+/* Nome com destaque */
+.heroName {
+    display: inline;
+    position: relative;
+    color: #111;
+    transition: color 0.3s ease;
+}
+
+[data-theme='dark'] .heroName {
+    color: #fff;
+}
+
+/* Subtítulo */
+.heroSubtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-weight: 400;
+    color: #444;
+    max-width: 640px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.5s forwards;
+    transition: color 0.3s ease;
+}
+
+[data-theme='dark'] .heroSubtitle {
+    color: #ccc;
+    /* Off-white dimmed */
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ações - Mantendo estilo pill dos botões */
+.heroActions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.8s forwards;
+    max-width: 280px;
+}
+
+/* Botões no estilo pill do portfólio */
+.heroLink {
+    padding: 0.875rem 1.75rem;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid transparent;
+    display: block;
+}
+
+/* Primeiro botão - Primary */
+.heroLink:first-child {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+[data-theme='dark'] .heroLink:first-child {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.heroLink:first-child:hover {
+    background: #5227ff;
+    border-color: #5227ff;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(82, 39, 255, 0.3);
+}
+
+[data-theme='dark'] .heroLink:first-child:hover {
+    background: #5227ff;
+    border-color: #5227ff;
+    color: #fff;
+}
+
+/* Segundo botão - Secondary */
+.heroLink:last-child {
+    background: transparent;
+    color: #111;
+    border-color: #111;
+}
+
+[data-theme='dark'] .heroLink:last-child {
+    color: #fff;
+    border-color: #fff;
+}
+
+.heroLink:last-child:hover {
+    background: #111;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='dark'] .heroLink:last-child:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Remover estilos de link do CSS enviado */
+.linkText {
+    display: block;
+}
+
+/* Tablet */
+@media (min-width: 640px) {
+    .hero {
+        padding-top: 120px;
+    }
+
+    .heroContent {
+        padding: 0 2.5rem;
+    }
+
+    .heroTitle {
+        margin-bottom: 28px;
+    }
+
+    .heroSubtitle {
+        margin-bottom: 42px;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero {
+        padding-top: 140px;
+    }
+
+    .heroContent {
+        padding: 0 4rem;
+    }
+
+    .heroActions {
+        flex-direction: row;
+        gap: 1.5rem;
+        max-width: none;
+    }
+
+    .heroLink {
+        padding: 1rem 2rem;
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .hero {
+        padding-top: 160px;
+    }
+
+    .heroContent {
+        max-width: 1400px;
+        padding-left: 6rem;
+        padding-right: 3rem;
+    }
+
+    .heroLink {
+        font-size: 0.95rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .heroContent {
+        padding-left: 8rem;
+        padding-right: 4rem;
+    }
+
+    .heroLink {
+        font-size: 1rem;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .heroContent,
+    .heroSubtitle,
+    .heroActions {
+        animation: none;
+        opacity: 1;
+    }
+
+    .heroLink {
+        transition: none;
+    }
+}
+
+/* Print */
+@media print {
+    .heroCanvas {
+        display: none;
+    }
+
+    .hero {
+        background: white;
+        min-height: auto;
+        padding: 2rem 0;
+    }
+}

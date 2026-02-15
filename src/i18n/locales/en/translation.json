@@ -1,0 +1,11 @@
+{
+    "title": "My Portfolio",
+    "hero": {
+        "greeting": "Hello, I'm",
+        "name": "João Galimberti",
+        "role": "Full Stack Web Developer",
+        "description": "I create modern, performant, and well-structured web interfaces.",
+        "viewProjects": "View projects",
+        "contact": "Get in touch"
+    }
+}
