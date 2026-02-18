@@ -3,7 +3,7 @@
         "home": "Home",
         "about": "About",
         "skills": "Skills",
-        "pricing": "Pricing",
+        "pricing": "Investment",
         "projects": "Projects",
         "contact": "Contact"
     },
@@ -39,7 +39,7 @@
         "plans": {
             "lp": {
                 "title": "Landing Page",
-                "price": "Starting at R$ 800",
+                "price": "Starting at U$ 800",
                 "description": "Ideal for capturing leads and presenting your service.",
                 "features": [
                     "Custom Design",
@@ -52,7 +52,7 @@
             },
             "institutional": {
                 "title": "Institutional Site",
-                "price": "Starting at R$ 1,500",
+                "price": "Starting at U$ 1,500",
                 "description": "For companies that want to consolidate their brand.",
                 "features": [
                     "Up to 5 Pages",

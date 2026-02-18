@@ -3,7 +3,7 @@
         "home": "Início",
         "about": "Sobre",
         "skills": "Habilidades",
-        "pricing": "Planos",
+        "pricing": "Investimento",
         "projects": "Projetos",
         "contact": "Contato"
     },
@@ -16,7 +16,7 @@
         "contact": "Entrar em contato"
     },
     "about": {
-        "number": "01 | ABOUT",
+        "number": "01 | SOBRE",
         "title": "Transformando ideias em interfaces reais",
         "text1": "Olá! Sou João Vitor, desenvolvedor em formação com foco em Front-End e construção de aplicações Web modernas. Estou constantemente evoluindo minhas habilidades e aplicando tecnologias atuais para criar interfaces intuitivas e experiências digitais significativas.",
         "text2": "Tenho experiência prática no manejo de dados, desenvolvimento web e ferramentas de análise, sempre buscando entregar projetos organizados, escaláveis e com atenção à performance e usabilidade. Meu objetivo é crescer como Full Stack Developer, aprendendo e contribuindo em projetos reais.",
@@ -28,7 +28,7 @@
         "loading": "Carregando..."
     },
     "skills": {
-        "number": "02 | SKILLS",
+        "number": "02 | HABILIDADES",
         "title": "Principais Tecnologias & Conhecimentos"
     },
     "pricing": {

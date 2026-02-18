@@ -3,10 +3,11 @@
     position: relative;
     min-height: 100vh;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     background: #ffffff;
     overflow: hidden;
-    padding-top: 100px;
+    padding-top: 60px;
+    /* Reduced for mobile when centered */
     transition: background-color 0.3s ease;
 }
 
@@ -192,7 +193,8 @@
 /* Tablet */
 @media (min-width: 640px) {
     .hero {
-        padding-top: 120px;
+        padding-top: 0;
+        align-items: center;
     }
 
     .heroContent {
@@ -210,7 +212,7 @@
 
 @media (min-width: 768px) {
     .hero {
-        padding-top: 140px;
+        padding-top: 0;
     }
 
     .heroContent {
@@ -231,7 +233,7 @@
 /* Desktop */
 @media (min-width: 1024px) {
     .hero {
-        padding-top: 160px;
+        padding-top: 80px;
     }
 
     .heroContent {
@@ -246,6 +248,10 @@
 }
 
 @media (min-width: 1280px) {
+    .hero {
+        padding-top: 100px;
+    }
+
     .heroContent {
         padding-left: 8rem;
         padding-right: 4rem;
