@@ -1,5 +1,12 @@
 {
-    "title": "Meu Portfólio",
+    "menu": {
+        "home": "Início",
+        "about": "Sobre",
+        "skills": "Habilidades",
+        "pricing": "Planos",
+        "projects": "Projetos",
+        "contact": "Contato"
+    },
     "hero": {
         "greeting": "Olá, eu sou",
         "name": "João Galimberti",
@@ -7,5 +14,98 @@
         "description": "Crio interfaces modernas, performáticas e bem estruturadas para a web.",
         "viewProjects": "Ver projetos",
         "contact": "Entrar em contato"
+    },
+    "about": {
+        "number": "01 | ABOUT",
+        "title": "Transformando ideias em interfaces reais",
+        "text1": "Olá! Sou João Vitor, desenvolvedor em formação com foco em Front-End e construção de aplicações Web modernas. Estou constantemente evoluindo minhas habilidades e aplicando tecnologias atuais para criar interfaces intuitivas e experiências digitais significativas.",
+        "text2": "Tenho experiência prática no manejo de dados, desenvolvimento web e ferramentas de análise, sempre buscando entregar projetos organizados, escaláveis e com atenção à performance e usabilidade. Meu objetivo é crescer como Full Stack Developer, aprendendo e contribuindo em projetos reais.",
+        "stats": {
+            "years": "Anos de experiência em TI",
+            "projects": "Projetos de estudo e prática",
+            "hours": "Horas de aprendizado contínuo"
+        },
+        "loading": "Carregando..."
+    },
+    "skills": {
+        "number": "02 | SKILLS",
+        "title": "Principais Tecnologias & Conhecimentos"
+    },
+    "pricing": {
+        "number": "03 | INVESTIMENTO",
+        "title": "Planos e Pacotes",
+        "subtitle": "Escolha a melhor solução para transformar sua presença digital.",
+        "cta": "Começar agora",
+        "plans": {
+            "lp": {
+                "title": "Landing Page",
+                "price": "A partir de R$ 800",
+                "description": "Ideal para captar leads e apresentar seu serviço.",
+                "features": [
+                    "Design Personalizado",
+                    "Alta Conversão",
+                    "Otimização Mobile",
+                    "Integração com WhatsApp",
+                    "Hospedagem Inclusa (1 ano)"
+                ],
+                "message": "Olá João! Vim do site e tenho interesse no plano Landing Page."
+            },
+            "institutional": {
+                "title": "Site Institucional",
+                "price": "A partir de R$ 1.500",
+                "description": "Para empresas que querem consolidar sua marca.",
+                "features": [
+                    "Até 5 Páginas",
+                    "SEO Básico",
+                    "Painel Administrativo",
+                    "Suporte Prioritário"
+                ],
+                "message": "Olá João! Vim do site e tenho interesse no plano Site Institucional."
+            },
+            "ecommerce": {
+                "title": "E-commerce",
+                "price": "Sob Consulta",
+                "description": "Venda seus produtos online com segurança.",
+                "features": [
+                    "Loja Completa",
+                    "Gestão de Estoque",
+                    "Integração de Pagamentos",
+                    "Cálculo de Frete",
+                    "Treinamento de Uso"
+                ],
+                "message": "Olá João! Vim do site e tenho interesse no plano E-commerce."
+            }
+        }
+    },
+    "projects": {
+        "number": "04 | PROJETOS",
+        "title": "Projetos em Destaque",
+        "demo": "Demo",
+        "code": "Código",
+        "items": {
+            "solene": {
+                "title": "Solene – E-commerce",
+                "desc": "Plataforma completa de e-commerce desenvolvida com React, focada em moda premium de linho europeu. Possui catálogo dinâmico de produtos, carrinho de compras em tempo real, filtros avançados, ordenação, busca, controle de quantidades, persistência de estado entre páginas e design totalmente responsivo."
+            },
+            "sus": {
+                "title": "Formulário de Pesquisa – SUS",
+                "desc": "Formulário de pesquisa responsivo desenvolvido com HTML semântico, CSS moderno e JavaScript, com foco em acessibilidade, organização visual, validações inteligentes e interação fluida com o usuário."
+            },
+            "techdocs": {
+                "title": "Documentação Técnica Interativa",
+                "desc": "Página de documentação técnica limpa, organizada e responsiva, desenvolvida com HTML, CSS e JavaScript, com navegação intuitiva, foco em acessibilidade e estrutura ideal para aprendizado rápido em múltiplos dispositivos."
+            }
+        }
+    },
+    "contact": {
+        "number": "05 | CONTATO",
+        "title": "Vamos trabalhar juntos",
+        "email": "Email",
+        "whatsapp": "WhatsApp",
+        "github": "GitHub",
+        "linkedin": "LinkedIn"
+    },
+    "footer": {
+        "rights": "Todos os direitos reservados."
     }
 }

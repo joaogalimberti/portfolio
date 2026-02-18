@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const techStacks = [
   {
@@ -114,6 +115,7 @@ const shuffleArray = (array) => {
 };
 
 export default function Skills() {
+  const { t } = useTranslation();
   const row1 = shuffleArray(techStacks).slice(0, 10);
   const row2 = shuffleArray(techStacks).slice(0, 10);
 
@@ -121,8 +123,8 @@ export default function Skills() {
     <section id="skills" className="skills">
       <div className="container">
         <div className="section-header reveal">
-          <div className="section-number">02 | SKILLS</div>
-          <h2 className="section-title">Principais Tecnologias & Conhecimentos</h2>
+          <div className="section-number">{t("skills.number")}</div>
+          <h2 className="section-title">{t("skills.title")}</h2>
         </div>
 
         <div className="skills-marquee-wrapper reveal">

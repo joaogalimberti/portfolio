@@ -1,35 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import styles from './Header.module.css';
 import useTheme from '../../hooks/useTheme';
 
 export default function Header() {
+  const { t, i18n } = useTranslation();
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [language, setLanguage] = useState('pt');
 
-  const translations = {
-    pt: {
-      menu: [
-        { label: "Início", link: "#hero" },
-        { label: "Sobre", link: "#about" },
-        { label: "Habilidades", link: "#skills" },
-        { label: "Planos", link: "#pricing" },
-        { label: "Projetos", link: "#projects" },
-        { label: "Contato", link: "#contact" }
-      ]
-    },
-    en: {
-      menu: [
-        { label: "Home", link: "#hero" },
-        { label: "About", link: "#about" },
-        { label: "Skills", link: "#skills" },
-        { label: "Pricing", link: "#pricing" },
-        { label: "Projects", link: "#projects" },
-        { label: "Contact", link: "#contact" }
-      ]
-    }
-  };
+  const menuItems = [
+    { label: t("menu.home"), link: "#hero" },
+    { label: t("menu.about"), link: "#about" },
+    { label: t("menu.skills"), link: "#skills" },
+    { label: t("menu.pricing"), link: "#pricing" },
+    { label: t("menu.projects"), link: "#projects" },
+    { label: t("menu.contact"), link: "#contact" }
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,10 +36,9 @@ export default function Header() {
   };
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'pt' ? 'en' : 'pt');
+    const newLang = i18n.language === 'pt' ? 'en' : 'pt';
+    i18n.changeLanguage(newLang);
   };
-
-  const menuItems = translations[language].menu;
 
   return (
     <motion.header
@@ -111,7 +97,7 @@ export default function Header() {
             onClick={toggleLanguage}
             aria-label="Toggle language"
           >
-            {language.toUpperCase()}
+            {i18n.language === 'pt' ? 'PT' : 'EN'}
           </button>
 
           <button

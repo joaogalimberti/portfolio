@@ -1,26 +1,28 @@
+import { useTranslation } from "react-i18next";
 import "./Projects.css";
 
 export default function Projects() {
+  const { t } = useTranslation();
   const projects = [
     {
-      title: "Solene – E-commerce",
-      desc: "Plataforma completa de e-commerce desenvolvida com React, focada em moda premium de linho europeu. Possui catálogo dinâmico de produtos, carrinho de compras em tempo real, filtros avançados, ordenação, busca, controle de quantidades, persistência de estado entre páginas e design totalmente responsivo.",
+      title: t("projects.items.solene.title"),
+      desc: t("projects.items.solene.desc"),
       img: "solene.jpeg",
       tech: ["React", "JavaScript", "HTML5", "CSS3", "JSON", "React Router", "DOM", "Vite", "UI Moderna"],
       demo: "https://joaogalimberti.github.io/solene-ecommerce-page/",
       code: "https://github.com/joaogalimberti/solene-ecommerce-page"
     },
     {
-      title: "Formulário de Pesquisa – SUS",
-      desc: "Formulário de pesquisa responsivo desenvolvido com HTML semântico, CSS moderno e JavaScript, com foco em acessibilidade, organização visual, validações inteligentes e interação fluida com o usuário.",
+      title: t("projects.items.sus.title"),
+      desc: t("projects.items.sus.desc"),
       img: "sus.jpeg",
       tech: ["HTML5", "CSS3", "JavaScript", "DOM", "Regex"],
       demo: "https://joaogalimberti.github.io/survey-form-sus/",
       code: "https://github.com/joaogalimberti/survey-form-sus"
     },
     {
-      title: "Documentação Técnica Interativa",
-      desc: "Página de documentação técnica limpa, organizada e responsiva, desenvolvida com HTML, CSS e JavaScript, com navegação intuitiva, foco em acessibilidade e estrutura ideal para aprendizado rápido em múltiplos dispositivos.",
+      title: t("projects.items.techdocs.title"),
+      desc: t("projects.items.techdocs.desc"),
       img: "techdocs.jpeg",
       tech: ["HTML5", "CSS3", "JavaScript", "DOM"],
       demo: "https://joaogalimberti.github.io/technical-documentation-freecodecamp/",
@@ -33,8 +35,8 @@ export default function Projects() {
     <section id="projects">
       <div className="container">
         <div className="section-header reveal">
-          <div className="section-number">04 | PROJETOS</div>
-          <h2 className="section-title">Projetos em Destaque</h2>
+          <div className="section-number">{t("projects.number")}</div>
+          <h2 className="section-title">{t("projects.title")}</h2>
         </div>
 
         <div className="projects-grid reveal">
@@ -53,8 +55,8 @@ export default function Projects() {
                       ))}
                     </div>
                     <div className="project-links">
-                      <a href={project.demo} target="_blank" className="project-link">Demo</a>
-                      <a href={project.code} target="_blank" className="project-link">Código</a>
+                      <a href={project.demo} target="_blank" className="project-link">{t("projects.demo")}</a>
+                      <a href={project.code} target="_blank" className="project-link">{t("projects.code")}</a>
                     </div>
                   </div>
                 </div>

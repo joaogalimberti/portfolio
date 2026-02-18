@@ -1,48 +1,33 @@
+import { useTranslation } from "react-i18next";
 import styles from "./Pricing.module.css";
 
 export default function Pricing() {
+    const { t } = useTranslation();
     const phoneNumber = "5527995059130";
 
     const plans = [
         {
-            title: "Landing Page",
-            price: "A partir de R$ 800",
-            description: "Ideal para captar leads e apresentar seu serviço.",
-            features: [
-                "Design Personalizado",
-                "Alta Conversão",
-                "Otimização Mobile",
-                "Integração com WhatsApp",
-                "Hospedagem Inclusa (1 ano)"
-            ],
+            title: t("pricing.plans.lp.title"),
+            price: t("pricing.plans.lp.price"),
+            description: t("pricing.plans.lp.description"),
+            features: t("pricing.plans.lp.features", { returnObjects: true }),
             highlight: false,
-            message: "Olá João! Vim do site e tenho interesse no plano Landing Page."
+            message: t("pricing.plans.lp.message")
         },
         {
-            title: "Site Institucional",
-            price: "A partir de R$ 1.500",
-            description: "Para empresas que querem consolidar sua marca.",
-            features: [
-                "Até 5 Páginas",
-                "SEO Básico",
-                "Painel Administrativo",
-                "Suporte Prioritário"
-            ],
+            title: t("pricing.plans.institutional.title"),
+            price: t("pricing.plans.institutional.price"),
+            description: t("pricing.plans.institutional.description"),
+            features: t("pricing.plans.institutional.features", { returnObjects: true }),
             highlight: true,
-            message: "Olá João! Vim do site e tenho interesse no plano Site Institucional."
+            message: t("pricing.plans.institutional.message")
         },
         {
-            title: "E-commerce",
-            price: "Sob Consulta",
-            description: "Venda seus produtos online com segurança.",
-            features: [
-                "Loja Completa",
-                "Gestão de Estoque",
-                "Integração de Pagamentos",
-                "Cálculo de Frete",
-                "Treinamento de Uso"
-            ],
-            message: "Olá João! Vim do site e tenho interesse no plano E-commerce."
+            title: t("pricing.plans.ecommerce.title"),
+            price: t("pricing.plans.ecommerce.price"),
+            description: t("pricing.plans.ecommerce.description"),
+            features: t("pricing.plans.ecommerce.features", { returnObjects: true }),
+            message: t("pricing.plans.ecommerce.message")
         }
     ];
 
@@ -50,10 +35,10 @@ export default function Pricing() {
         <section id="pricing" className={styles.pricingSection}>
             <div className="container">
                 <div className="section-header reveal">
-                    <div className="section-number">03 | INVESTIMENTO</div>
-                    <h2 className="section-title">Planos e Pacotes</h2>
+                    <div className="section-number">{t("pricing.number")}</div>
+                    <h2 className="section-title">{t("pricing.title")}</h2>
                     <p className={styles.subtitle}>
-                        Escolha a melhor solução para transformar sua presença digital.
+                        {t("pricing.subtitle")}
                     </p>
                 </div>
 
@@ -72,7 +57,7 @@ export default function Pricing() {
                             </div>
 
                             <ul className={styles.featuresList}>
-                                {plan.features.map((feature, i) => (
+                                {plan.features && Array.isArray(plan.features) && plan.features.map((feature, i) => (
                                     <li key={i} className={styles.featureItem}>
                                         <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                             <polyline points="20 6 9 17 4 12"></polyline>
@@ -88,7 +73,7 @@ export default function Pricing() {
                                 rel="noopener noreferrer"
                                 className={styles.ctaButton}
                             >
-                                Começar agora
+                                {t("pricing.cta")}
                             </a>
                         </div>
                     ))}

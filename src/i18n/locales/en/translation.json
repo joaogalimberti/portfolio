@@ -1,5 +1,12 @@
 {
-    "title": "My Portfolio",
+    "menu": {
+        "home": "Home",
+        "about": "About",
+        "skills": "Skills",
+        "pricing": "Pricing",
+        "projects": "Projects",
+        "contact": "Contact"
+    },
     "hero": {
         "greeting": "Hello, I'm",
         "name": "João Galimberti",
@@ -7,5 +14,98 @@
         "description": "I create modern, performant, and well-structured web interfaces.",
         "viewProjects": "View projects",
         "contact": "Get in touch"
+    },
+    "about": {
+        "number": "01 | ABOUT",
+        "title": "Transforming ideas into real interfaces",
+        "text1": "Hello! I'm João Vitor, a developer in training with a focus on Front-End and building modern web applications. I'm constantly evolving my skills and applying current technologies to create intuitive interfaces and meaningful digital experiences.",
+        "text2": "I have practical experience in data management, web development, and analysis tools, always seeking to deliver organized, scalable projects with attention to performance and usability. My goal is to grow as a Full Stack Developer, learning and contributing to real projects.",
+        "stats": {
+            "years": "Years of IT experience",
+            "projects": "Study and practice projects",
+            "hours": "Hours of continuous learning"
+        },
+        "loading": "Loading..."
+    },
+    "skills": {
+        "number": "02 | SKILLS",
+        "title": "Core Technologies & Knowledge"
+    },
+    "pricing": {
+        "number": "03 | INVESTMENT",
+        "title": "Plans and Packages",
+        "subtitle": "Choose the best solution to transform your digital presence.",
+        "cta": "Start now",
+        "plans": {
+            "lp": {
+                "title": "Landing Page",
+                "price": "Starting at R$ 800",
+                "description": "Ideal for capturing leads and presenting your service.",
+                "features": [
+                    "Custom Design",
+                    "High Conversion",
+                    "Mobile Optimization",
+                    "WhatsApp Integration",
+                    "Hosting Included (1 year)"
+                ],
+                "message": "Hi João! I came from the website and I'm interested in the Landing Page plan."
+            },
+            "institutional": {
+                "title": "Institutional Site",
+                "price": "Starting at R$ 1,500",
+                "description": "For companies that want to consolidate their brand.",
+                "features": [
+                    "Up to 5 Pages",
+                    "Basic SEO",
+                    "Admin Panel",
+                    "Priority Support"
+                ],
+                "message": "Hi João! I came from the website and I'm interested in the Institutional Site plan."
+            },
+            "ecommerce": {
+                "title": "E-commerce",
+                "price": "On Request",
+                "description": "Sell your products online securely.",
+                "features": [
+                    "Complete Store",
+                    "Inventory Management",
+                    "Payment Integration",
+                    "Shipping Calculation",
+                    "Usage Training"
+                ],
+                "message": "Hi João! I came from the website and I'm interested in the E-commerce plan."
+            }
+        }
+    },
+    "projects": {
+        "number": "04 | PROJECTS",
+        "title": "Featured Projects",
+        "demo": "Demo",
+        "code": "Code",
+        "items": {
+            "solene": {
+                "title": "Solene – E-commerce",
+                "desc": "Complete e-commerce platform developed with React, focused on premium European linen fashion. Features dynamic product catalog, real-time shopping cart, advanced filters, sorting, search, quantity control, state persistence between pages, and fully responsive design."
+            },
+            "sus": {
+                "title": "Research Form – SUS",
+                "desc": "Responsive research form developed with semantic HTML, modern CSS, and JavaScript, focusing on accessibility, visual organization, smart validation, and fluid user interaction."
+            },
+            "techdocs": {
+                "title": "Interactive Technical Documentation",
+                "desc": "Clean, organized, and responsive technical documentation page, developed with HTML, CSS and JavaScript, with intuitive navigation, focus on accessibility, and ideal structure for fast learning on multiple devices."
+            }
+        }
+    },
+    "contact": {
+        "number": "05 | CONTACT",
+        "title": "Let's work together",
+        "email": "Email",
+        "whatsapp": "WhatsApp",
+        "github": "GitHub",
+        "linkedin": "LinkedIn"
+    },
+    "footer": {
+        "rights": "All rights reserved."
     }
 }

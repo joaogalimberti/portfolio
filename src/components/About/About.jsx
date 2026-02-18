@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./About.module.css";
 import AboutAnimation from "./AboutAnimation";
 
@@ -62,10 +63,12 @@ function Counter({ target, duration = 2, plus }) {
 }
 
 export default function About() {
+  const { t } = useTranslation();
+
   const statsData = [
-    { label: "Anos de experiência em TI", target: 4, plus: false },
-    { label: "Projetos de estudo e prática", target: 10, plus: true },
-    { label: "Horas de aprendizado contínuo", target: 10000, plus: true }
+    { label: t("about.stats.years"), target: 4, plus: false },
+    { label: t("about.stats.projects"), target: 10, plus: true },
+    { label: t("about.stats.hours"), target: 10000, plus: true }
   ];
 
   return (
@@ -73,25 +76,19 @@ export default function About() {
       <div className="container">
         {/* Cabeçalho de seção */}
         <div className="section-header reveal">
-          <div className="section-number">01 | ABOUT</div>
-          <h2 className="section-title">Transformando ideias em interfaces reais</h2>
+          <div className="section-number">{t("about.number")}</div>
+          <h2 className="section-title">{t("about.title")}</h2>
         </div>
 
         {/* Grid com texto à esquerda e imagem à direita */}
         <div className={`${styles.aboutGrid} reveal`}>
           <div className={styles.aboutContent}>
             <p className={styles.aboutText}>
-              Olá! Sou João Vitor, desenvolvedor em formação com foco em Front-End e
-              construção de aplicações Web modernas. Estou constantemente evoluindo minhas
-              habilidades e aplicando tecnologias atuais para criar interfaces intuitivas
-              e experiências digitais significativas.
+              {t("about.text1")}
             </p>
 
             <p className={styles.aboutText}>
-              Tenho experiência prática no manejo de dados, desenvolvimento web e
-              ferramentas de análise, sempre buscando entregar projetos organizados,
-              escaláveis e com atenção à performance e usabilidade. Meu objetivo é crescer
-              como Full Stack Developer, aprendendo e contribuindo em projetos reais.
+              {t("about.text2")}
             </p>
           </div>
 

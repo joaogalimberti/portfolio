@@ -1,86 +1,58 @@
+import { useTranslation } from "react-i18next";
 import "./Contact.css";
 
 export default function Contact() {
+  const { t } = useTranslation();
+
+  const contactItems = [
+    {
+      label: t("contact.email"),
+      value: "eng.galimberti@gmail.com",
+      link: "mailto:eng.galimberti@gmail.com",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg"
+    },
+    {
+      label: t("contact.whatsapp"),
+      value: "+55 (27) 99505-9130",
+      link: "https://wa.me/5527995059130",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/whatsapp.svg"
+    },
+    {
+      label: t("contact.github"),
+      value: "github.com/joaogalimberti",
+      link: "https://github.com/joaogalimberti",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"
+    },
+    {
+      label: t("contact.linkedin"),
+      value: "linkedin.com/in/joaogalimberti",
+      link: "https://www.linkedin.com/in/joaogalimberti",
+      icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg"
+    }
+  ];
+
   return (
     <section id="contact">
       <div className="container reveal">
         <div className="section-header">
-          <div className="section-number">05 | CONTATO</div>
-          <h2 className="section-title">Vamos trabalhar juntos</h2>
+          <div className="section-number">{t("contact.number")}</div>
+          <h2 className="section-title">{t("contact.title")}</h2>
         </div>
 
         <div className="contact-grid">
-          {/* Email */}
-          <div className="contact-item">
-            <a href="mailto:joaogalimberti@gmail.com">
-              <div className="contact-icon-wrapper">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"
-                  alt="Email"
-                  className="contact-icon"
-                />
-              </div>
-              <div className="contact-label">Email</div>
-              <div className="contact-value">joaogalimberti@gmail.com</div>
-            </a>
-          </div>
-
-          {/* WhatsApp */}
-          <div className="contact-item">
-            <a
-              href="https://wa.me/5527995059130?text=Ol%C3%A1%20Jo%C3%A3o!%20Vim%20do%20seu%20site%20e%20gostaria%20de%20conversar."
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="contact-icon-wrapper">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg"
-                  alt="WhatsApp"
-                  className="contact-icon"
-                />
-              </div>
-              <div className="contact-label">WhatsApp</div>
-              <div className="contact-value">+55 (27) 99505-9130</div>
-            </a>
-          </div>
-
-          {/* GitHub */}
-          <div className="contact-item">
-            <a
-              href="https://github.com/joaogalimberti"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="contact-icon-wrapper">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg"
-                  alt="GitHub"
-                  className="contact-icon"
-                />
-              </div>
-              <div className="contact-label">GitHub</div>
-              <div className="contact-value">@joaogalimberti</div>
-            </a>
-          </div>
-
-          {/* LinkedIn */}
-          <div className="contact-item">
-            <a
-              href="https://linkedin.com/in/joaogalimberti"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="contact-icon-wrapper">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
-                  alt="LinkedIn"
-                  className="contact-icon"
-                />
-              </div>
-              <div className="contact-label">LinkedIn</div>
-              <div className="contact-value">@joaogalimberti</div>
-            </a>
-          </div>
+          {contactItems.map((item, index) => (
+            <div className="contact-item" key={index}>
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                <div className="contact-icon-wrapper">
+                  <img src={item.icon} alt={item.label} className="contact-icon" />
+                </div>
+                <div className="contact-info">
+                  <span className="contact-label">{item.label}</span>
+                  <p className="contact-value">{item.value}</p>
+                </div>
+              </a>
+            </div>
+          ))}
         </div>
       </div>
     </section>
