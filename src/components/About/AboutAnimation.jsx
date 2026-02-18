@@ -7,19 +7,37 @@ export default function AboutAnimation() {
     const totalFrames = 192;
     const imagesRef = useRef([]);
 
+    const [isVisible, setIsVisible] = useState(false);
+    const containerRef = useRef(null);
+
     useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
+    useEffect(() => {
+        if (!isVisible) return;
+
         let images = [];
         let loadedCount = 0;
 
         const preloadImages = () => {
             for (let i = 1; i <= totalFrames; i++) {
                 const img = new Image();
-                // Pads numbers with leading zeros: 1 -> 001, 50 -> 050, etc.
                 const frameNumber = i.toString().padStart(3, '0');
-                img.src = `/portfolio/about-animation/${frameNumber}.png`; // Assuming base path might need adjustment if deployed differently, but '/about-animation' is standard public
-                // Adjusting path to match user's public folder structure: /about-animation/001.png
-                // If the site is served from root, it's /about-animation/...
-                // However, user setup seems to be Vite, so 'public' contents are at root.
                 img.src = `/about-animation/${frameNumber}.png`;
 
                 img.onload = () => {
@@ -34,7 +52,7 @@ export default function AboutAnimation() {
         };
 
         preloadImages();
-    }, []);
+    }, [isVisible]);
 
     useEffect(() => {
         if (!imagesLoaded) return;
@@ -82,8 +100,8 @@ export default function AboutAnimation() {
     }, [imagesLoaded]);
 
     return (
-        <div className={styles.animationContainer}>
-            {!imagesLoaded && <div className={styles.loadingPlaceholder}>Loading...</div>}
+        <div ref={containerRef} className={styles.animationContainer}>
+            {!imagesLoaded && isVisible && <div className={styles.loadingPlaceholder}>Loading...</div>}
             <canvas
                 ref={canvasRef}
                 className={styles.aboutCanvas}
