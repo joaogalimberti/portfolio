@@ -262,8 +262,8 @@
         grid-template-columns: repeat(3, 1fr);
         /* 3 columns */
         gap: 2rem;
-        align-items: start;
-        /* Align top */
+        align-items: stretch;
+        /* Stretch to equal height */
     }
 
     /* Make highlighted card slightly larger on desktop */

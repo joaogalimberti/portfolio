@@ -1,17 +1,37 @@
 /* Contact */
 #contact {
-    background: var(--primary);
+    background: #1a1a1a;
     border-top-left-radius: 2.5rem;
     /* Smaller radius for mobile */
     border-top-right-radius: 2.5rem;
-    color: var(--white);
+    color: #ffffff;
     padding: 4rem 1rem;
-    /* Adjust padding for mobile */
+    /* Standard padding */
+    transition: background-color 0.3s ease;
 }
 
-#contact .section-number,
+[data-theme='dark'] #contact {
+    background: #0d0d0d;
+}
+
+[data-theme='dark'] #contact .section-title {
+    color: #f5f5f5;
+}
+
+[data-theme='dark'] .contact-value {
+    color: #f5f5f5;
+}
+
+[data-theme='dark'] .contact-label {
+    color: rgba(245, 245, 245, 0.6);
+}
+
+#contact .section-number {
+    color: #f5f5f5;
+}
+
 #contact .section-title {
-    color: var(--white);
+    color: #ffffff;
 }
 
 .contact-grid {

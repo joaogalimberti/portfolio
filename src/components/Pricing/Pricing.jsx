@@ -1,7 +1,7 @@
 import styles from "./Pricing.module.css";
 
 export default function Pricing() {
-    const phoneNumber = "5511999999999"; // Replace with actual number if provided, otherwise placeholder
+    const phoneNumber = "5527995059130";
 
     const plans = [
         {
@@ -13,7 +13,7 @@ export default function Pricing() {
                 "Alta Conversão",
                 "Otimização Mobile",
                 "Integração com WhatsApp",
-                "Hospedagem Inclusa (1 mês)"
+                "Hospedagem Inclusa (1 ano)"
             ],
             highlight: false,
             message: "Olá João! Vim do site e tenho interesse no plano Landing Page."
@@ -24,7 +24,6 @@ export default function Pricing() {
             description: "Para empresas que querem consolidar sua marca.",
             features: [
                 "Até 5 Páginas",
-                "Blog Integrado",
                 "SEO Básico",
                 "Painel Administrativo",
                 "Suporte Prioritário"

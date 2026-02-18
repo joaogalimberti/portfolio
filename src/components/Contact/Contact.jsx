@@ -5,7 +5,7 @@ export default function Contact() {
     <section id="contact">
       <div className="container reveal">
         <div className="section-header">
-          <div className="section-number">05 / CONTATO</div>
+          <div className="section-number">05 | CONTATO</div>
           <h2 className="section-title">Vamos trabalhar juntos</h2>
         </div>
 
