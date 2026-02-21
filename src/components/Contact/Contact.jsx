@@ -7,8 +7,8 @@ export default function Contact() {
   const contactItems = [
     {
       label: t("contact.email"),
-      value: "eng.galimberti@gmail.com",
-      link: "mailto:eng.galimberti@gmail.com",
+      value: "joaogalimberti@gmail.com",
+      link: "mailto:joaogalimberti@gmail.com",
       icon: "https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg"
     },
     {
