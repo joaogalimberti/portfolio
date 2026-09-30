@@ -148,16 +148,16 @@
 }
 
 .heroLink:first-child:hover {
-    background: #5227ff;
-    border-color: #5227ff;
+    background: #6e7277;
+    border-color: #6e7277;
     color: #fff;
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(82, 39, 255, 0.3);
+    box-shadow: 0 10px 25px rgba(110, 114, 119, 0.3);
 }
 
 [data-theme='dark'] .heroLink:first-child:hover {
-    background: #5227ff;
-    border-color: #5227ff;
+    background: #6e7277;
+    border-color: #6e7277;
     color: #fff;
 }
 

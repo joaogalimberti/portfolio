@@ -57,7 +57,7 @@ export default function Header() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <span>JG</span>
+          <img src="/logo.png" alt="João Galimberti Logo" className={styles.logoImg} />
         </motion.div>
 
         <nav className={styles.nav}>
