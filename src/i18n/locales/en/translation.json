@@ -3,7 +3,7 @@
         "home": "Home",
         "about": "About",
         "skills": "Skills",
-        "pricing": "Investment",
+        "pricing": "Pricing",
         "projects": "Projects",
         "contact": "Contact"
     },
@@ -11,95 +11,144 @@
         "greeting": "Hello, I'm",
         "name": "João Galimberti",
         "role": "Full Stack Web Developer",
-        "description": "I create modern, performant, and well-structured web interfaces.",
-        "viewProjects": "View projects",
-        "contact": "Get in touch"
+        "description": "I create modern, high-performance, and well-structured web applications.",
+        "viewProjects": "View Projects",
+        "contact": "Get in Touch"
     },
     "about": {
         "number": "01 | ABOUT",
-        "title": "Transforming ideas into real interfaces",
-        "text1": "Hello! I'm João Vitor, a developer in training with a focus on Front-End and building modern web applications. I'm constantly evolving my skills and applying current technologies to create intuitive interfaces and meaningful digital experiences.",
-        "text2": "I have practical experience in data management, web development, and analysis tools, always seeking to deliver organized, scalable projects with attention to performance and usability. My goal is to grow as a Full Stack Developer, learning and contributing to real projects.",
+        "title": "Transforming ideas into real digital experiences",
+        "intro": "Hello! I'm João Galimberti, a Web Developer specializing in modern <b>Front-End</b> and Full-Stack applications.",
+        "text1": "I am constantly evolving my technical skill set and leveraging cutting-edge technologies to build intuitive user interfaces and impactful digital experiences.",
+        "text2": "I bring practical experience in data architecture, web engineering, and modern frameworks, always focusing on clean code, scalability, and optimal performance. My goal is to build robust, high-impact products and collaborate on ambitious projects.",
+        "readMore": "Read more +",
+        "readLess": "Read less −",
+        "idea": "Idea",
+        "interface": "Interface",
+        "demoHello": "Hello, World",
+        "demoStart": "Get Started",
+        "ariaSlider": "Drag slider to transform idea into interface",
         "stats": {
             "years": "Years of IT experience",
-            "projects": "Study and practice projects",
-            "hours": "Hours of continuous learning"
+            "projects": "Projects built & delivered",
+            "hours": "Hours of continuous practice"
         },
         "loading": "Loading..."
     },
     "skills": {
         "number": "02 | SKILLS",
-        "title": "Core Technologies & Knowledge"
+        "title": "Core Technologies & Expertise"
     },
     "pricing": {
-        "number": "03 | INVESTMENT",
-        "title": "Plans and Packages",
-        "subtitle": "Choose the best solution to transform your digital presence.",
-        "cta": "Start now",
+        "number": "03 | PRICING",
+        "title": "Plans & Packages",
+        "subtitle": "Choose the perfect solution to elevate your online presence.",
+        "popular": "Most Popular",
+        "from": "Starting at",
+        "investment": "Pricing",
+        "cta": "Get Started",
         "plans": {
             "lp": {
                 "title": "Landing Page",
-                "price": "Starting at U$ 800",
-                "description": "Ideal for capturing leads and presenting your service.",
+                "label": "Starting at",
+                "price": "$800",
+                "description": "High-converting single-page website to capture leads and showcase your offer.",
                 "features": [
-                    "Custom Design",
-                    "High Conversion",
-                    "Mobile Optimization",
-                    "WhatsApp Integration",
-                    "Hosting Included (1 year)"
+                    "Custom UI/UX Design",
+                    "Conversion Rate Optimization",
+                    "Full Mobile Responsiveness",
+                    "WhatsApp & Lead Integration",
+                    "1 Year Hosting Included"
                 ],
-                "message": "Hi João! I came from the website and I'm interested in the Landing Page plan."
+                "message": "Hi João! I saw your portfolio and I'm interested in the Landing Page plan."
             },
             "institutional": {
-                "title": "Institutional Site",
-                "price": "Starting at U$ 1,500",
-                "description": "For companies that want to consolidate their brand.",
+                "title": "Business Website",
+                "label": "Starting at",
+                "price": "$1,500",
+                "description": "Multi-page corporate website to build authority and strengthen your brand.",
                 "features": [
-                    "Up to 5 Pages",
-                    "Basic SEO",
-                    "Admin Panel",
+                    "Up to 5 Custom Pages",
+                    "Technical SEO Optimization",
+                    "Admin & Content Management",
                     "Priority Support"
                 ],
-                "message": "Hi João! I came from the website and I'm interested in the Institutional Site plan."
+                "message": "Hi João! I saw your portfolio and I'm interested in the Business Website plan."
             },
             "ecommerce": {
-                "title": "E-commerce",
+                "title": "E-Commerce",
+                "label": "Custom Quote",
                 "price": "On Request",
-                "description": "Sell your products online securely.",
+                "description": "Full-featured online store to sell your products safely and scale your business.",
                 "features": [
-                    "Complete Store",
-                    "Inventory Management",
-                    "Payment Integration",
-                    "Shipping Calculation",
-                    "Usage Training"
+                    "Complete Online Storefront",
+                    "Inventory & Product Management",
+                    "Secure Payment Gateways",
+                    "Automated Shipping Calculation",
+                    "Handover & Training Session"
                 ],
-                "message": "Hi João! I came from the website and I'm interested in the E-commerce plan."
+                "message": "Hi João! I saw your portfolio and I'm interested in an E-Commerce solution."
             }
         }
     },
     "projects": {
         "number": "04 | PROJECTS",
         "title": "Featured Projects",
-        "demo": "Demo",
-        "code": "Code",
-        "items": {
-            "solene": {
-                "title": "Solene – E-commerce",
-                "desc": "Complete e-commerce platform developed with React, focused on premium European linen fashion. Features dynamic product catalog, real-time shopping cart, advanced filters, sorting, search, quantity control, state persistence between pages, and fully responsive design."
+        "live": "Live Demo",
+        "code": "Source Code",
+        "streak": "12-day streak",
+        "scoreLabel": "SCORE",
+        "items": [
+            {
+                "id": "praeso",
+                "number": "01",
+                "title": "Praeso",
+                "desc": "Full-stack appointment booking platform that reduces client no-shows through real-time notifications, intelligent dashboards, and secure authentication.",
+                "tags": ["Full-Stack", "Dashboard", "Authentication"],
+                "liveUrl": "https://joaogalimberti.github.io/praeso/",
+                "codeUrl": "https://github.com/joaogalimberti/praeso"
             },
-            "sus": {
-                "title": "Research Form – SUS",
-                "desc": "Responsive research form developed with semantic HTML, modern CSS, and JavaScript, focusing on accessibility, visual organization, smart validation, and fluid user interaction."
+            {
+                "id": "solene",
+                "number": "02",
+                "title": "Solène — E-commerce",
+                "desc": "Luxury European linen e-commerce platform with dynamic catalog, interactive cart drawer, smart search, and fluid responsiveness.",
+                "tags": ["React", "E-commerce", "Responsive"],
+                "liveUrl": "https://joaogalimberti.github.io/solene-ecommerce-page/",
+                "codeUrl": "https://github.com/joaogalimberti/solene-ecommerce-page"
             },
-            "techdocs": {
-                "title": "Interactive Technical Documentation",
-                "desc": "Clean, organized, and responsive technical documentation page, developed with HTML, CSS and JavaScript, with intuitive navigation, focus on accessibility, and ideal structure for fast learning on multiple devices."
+            {
+                "id": "oliva",
+                "number": "03",
+                "title": "Oliva",
+                "desc": "Intelligent grocery list application with full CRUD, offline-first persistence, and REST API built in pure vanilla JS. On desktop, it renders in an interactive smartphone frame.",
+                "tags": ["HTML", "CSS", "JavaScript", "Vite"],
+                "liveUrl": "https://joaogalimberti.github.io/smart-shopping/",
+                "codeUrl": "https://github.com/joaogalimberti/smart-shopping"
+            },
+            {
+                "id": "strevo",
+                "number": "04",
+                "title": "Strevo",
+                "desc": "Workout consistency app with cyberpunk dark aesthetic, gamified progress statistics, and automated shareable story cards. 100% client-side.",
+                "tags": ["Fitness", "Dark UI", "Gamification"],
+                "liveUrl": "https://joaogalimberti.github.io/strevo/",
+                "codeUrl": "https://github.com/joaogalimberti/strevo"
+            },
+            {
+                "id": "dengue",
+                "number": "05",
+                "title": "Dengue Mission",
+                "desc": "Educational arcade game built with React, TypeScript, and Phaser. Features mosquito AI pathfinding, repellent mechanics, score tracking, and responsive layout.",
+                "tags": ["React", "TypeScript", "Phaser"],
+                "liveUrl": "https://joaogalimberti.github.io/dengue-mission/",
+                "codeUrl": "https://github.com/joaogalimberti/dengue-mission"
             }
-        }
+        ]
     },
     "contact": {
         "number": "05 | CONTACT",
-        "title": "Let's work together",
+        "title": "Let's build something great",
         "email": "Email",
         "whatsapp": "WhatsApp",
         "github": "GitHub",

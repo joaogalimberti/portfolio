@@ -57,7 +57,9 @@ export default function Header() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <img src="/logo.png" alt="João Galimberti Logo" className={styles.logoImg} />
+          <a href="#hero" className={styles.logoMark} aria-label="João Galimberti">
+            JG
+          </a>
         </motion.div>
 
         <nav className={styles.nav}>

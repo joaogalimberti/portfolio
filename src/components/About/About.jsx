@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./About.module.css";
-import AboutAnimation from "./AboutAnimation";
+import AboutDemo from "./AboutDemo";
 
-function Counter({ target, duration = 2, plus }) {
+function Counter({ target, duration = 1.8, plus }) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
@@ -15,7 +15,7 @@ function Counter({ target, duration = 2, plus }) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
     if (elementRef.current) {
@@ -28,35 +28,28 @@ function Counter({ target, duration = 2, plus }) {
   useEffect(() => {
     if (!isVisible) return;
 
-    let start = 0;
-    const end = parseInt(target);
-    if (start === end) return;
+    let startTime = null;
+    const end = parseInt(target, 10);
+    const totalMs = duration * 1000;
 
-    let totalMiliseconds = duration * 1000;
-    let incrementTime = totalMiliseconds / end;
+    const stepAnim = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / totalMs, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * end));
 
-    // Adjust for large numbers to keep performance
-    let step = 1;
-    if (end > 1000) {
-      step = Math.ceil(end / 100);
-      incrementTime = totalMiliseconds / 100;
-    }
-
-    let timer = setInterval(() => {
-      start += step;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(start);
+      if (progress < 1) {
+        requestAnimationFrame(stepAnim);
       }
-    }, incrementTime);
+    };
 
-    return () => clearInterval(timer);
+    const animId = requestAnimationFrame(stepAnim);
+    return () => cancelAnimationFrame(animId);
   }, [isVisible, target, duration]);
 
   return (
-    <span ref={elementRef} className={styles.countUpText}>
+    <span ref={elementRef} className={styles.statNumber}>
       {plus && "+"}{count.toLocaleString()}
     </span>
   );
@@ -64,6 +57,7 @@ function Counter({ target, duration = 2, plus }) {
 
 export default function About() {
   const { t } = useTranslation();
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const statsData = [
     { label: t("about.stats.years"), target: 4, plus: false },
@@ -80,36 +74,49 @@ export default function About() {
           <h2 className="section-title">{t("about.title")}</h2>
         </div>
 
-        {/* Grid com texto à esquerda e imagem à direita */}
+        {/* Grid com Demo slider à esquerda e conteúdo textual à direita */}
         <div className={`${styles.aboutGrid} reveal`}>
-          <div className={styles.aboutContent}>
-            <p className={styles.aboutText}>
-              {t("about.text1")}
-            </p>
+          <AboutDemo />
 
-            <p className={styles.aboutText}>
-              {t("about.text2")}
-            </p>
-          </div>
+          <div className={styles.sideContent}>
+            <p
+              className={styles.introText}
+              dangerouslySetInnerHTML={{ __html: t("about.intro") }}
+            />
 
-          <div className={styles.aboutImageWrapper}>
-            <AboutAnimation />
-          </div>
-        </div>
-
-        {/* Stats em linha no final da seção */}
-        <div className={`${styles.aboutStatsInline} reveal`}>
-          {statsData.map((stat, index) => (
-            <div className={styles.statItemInline} key={index}>
-              <Counter
-                target={stat.target}
-                duration={2}
-                plus={stat.plus}
-              />
-              <span className={styles.statLabelInline}>{stat.label}</span>
-              {index < statsData.length - 1 && <span className={styles.statSeparator}>|</span>}
+            <div className={`${styles.moreWrapper} ${isExpanded ? styles.open : ""}`} id="about-more">
+              <p className={styles.moreText}>
+                {t("about.text1")}
+              </p>
+              <p className={styles.moreText}>
+                {t("about.text2")}
+              </p>
             </div>
-          ))}
+
+            <button
+              type="button"
+              className={styles.readMoreBtn}
+              onClick={() => setIsExpanded((prev) => !prev)}
+              aria-expanded={isExpanded}
+              aria-controls="about-more"
+            >
+              {isExpanded ? t("about.readLess", "Ler menos −") : t("about.readMore", "Ler mais +")}
+            </button>
+
+            {/* Stats */}
+            <div className={styles.statsGrid}>
+              {statsData.map((stat, index) => (
+                <div className={styles.statItem} key={index}>
+                  <Counter
+                    target={stat.target}
+                    duration={1.8}
+                    plus={stat.plus}
+                  />
+                  <small className={styles.statLabel}>{stat.label}</small>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

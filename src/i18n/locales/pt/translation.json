@@ -18,8 +18,16 @@
     "about": {
         "number": "01 | SOBRE",
         "title": "Transformando ideias em interfaces reais",
-        "text1": "Olá! Sou João Vitor, desenvolvedor em formação com foco em Front-End e construção de aplicações Web modernas. Estou constantemente evoluindo minhas habilidades e aplicando tecnologias atuais para criar interfaces intuitivas e experiências digitais significativas.",
+        "intro": "Olá! Sou João Galimberti, desenvolvedor focado em <b>Front-End</b> e aplicações Web modernas.",
+        "text1": "Estou constantemente evoluindo minhas habilidades e aplicando tecnologias atuais para criar interfaces intuitivas e experiências digitais significativas.",
         "text2": "Tenho experiência prática no manejo de dados, desenvolvimento web e ferramentas de análise, sempre buscando entregar projetos organizados, escaláveis e com atenção à performance e usabilidade. Meu objetivo é crescer como Full Stack Developer, aprendendo e contribuindo em projetos reais.",
+        "readMore": "Ler mais +",
+        "readLess": "Ler menos −",
+        "idea": "Ideia",
+        "interface": "Interface",
+        "demoHello": "Olá, mundo",
+        "demoStart": "Começar",
+        "ariaSlider": "Arraste para transformar a ideia em interface",
         "stats": {
             "years": "Anos de experiência em TI",
             "projects": "Projetos de estudo e prática",
@@ -35,11 +43,15 @@
         "number": "03 | INVESTIMENTO",
         "title": "Planos e Pacotes",
         "subtitle": "Escolha a melhor solução para transformar sua presença digital.",
+        "popular": "Mais popular",
+        "from": "A partir de",
+        "investment": "Investimento",
         "cta": "Começar agora",
         "plans": {
             "lp": {
                 "title": "Landing Page",
-                "price": "A partir de R$ 800",
+                "label": "A partir de",
+                "price": "R$ 800",
                 "description": "Ideal para captar leads e apresentar seu serviço.",
                 "features": [
                     "Design Personalizado",
@@ -52,7 +64,8 @@
             },
             "institutional": {
                 "title": "Site Institucional",
-                "price": "A partir de R$ 1.500",
+                "label": "A partir de",
+                "price": "R$ 1.500",
                 "description": "Para empresas que querem consolidar sua marca.",
                 "features": [
                     "Até 5 Páginas",
@@ -64,6 +77,7 @@
             },
             "ecommerce": {
                 "title": "E-commerce",
+                "label": "Investimento",
                 "price": "Sob Consulta",
                 "description": "Venda seus produtos online com segurança.",
                 "features": [
@@ -80,22 +94,57 @@
     "projects": {
         "number": "04 | PROJETOS",
         "title": "Projetos em Destaque",
-        "demo": "Demo",
+        "live": "Ver ao vivo",
         "code": "Código",
-        "items": {
-            "solene": {
-                "title": "Solene – E-commerce",
-                "desc": "Plataforma completa de e-commerce desenvolvida com React, focada em moda premium de linho europeu. Possui catálogo dinâmico de produtos, carrinho de compras em tempo real, filtros avançados, ordenação, busca, controle de quantidades, persistência de estado entre páginas e design totalmente responsivo."
+        "streak": "12 dias",
+        "scoreLabel": "PONTOS",
+        "items": [
+            {
+                "id": "praeso",
+                "number": "01",
+                "title": "Praeso",
+                "desc": "Plataforma full-stack de agendamentos que reduz faltas com confirmações em tempo real, dashboards inteligentes e gestão segura de clientes.",
+                "tags": ["Full-Stack", "Dashboard", "Autenticação"],
+                "liveUrl": "https://joaogalimberti.github.io/praeso/",
+                "codeUrl": "https://github.com/joaogalimberti/praeso"
             },
-            "sus": {
-                "title": "Formulário de Pesquisa – SUS",
-                "desc": "Formulário de pesquisa responsivo desenvolvido com HTML semântico, CSS moderno e JavaScript, com foco em acessibilidade, organização visual, validações inteligentes e interação fluida com o usuário."
+            {
+                "id": "solene",
+                "number": "02",
+                "title": "Solène — E-commerce",
+                "desc": "Plataforma de moda em linho europeu: catálogo dinâmico, carrinho em tempo real, filtros, busca e design responsivo.",
+                "tags": ["React", "E-commerce", "Responsivo"],
+                "liveUrl": "https://joaogalimberti.github.io/solene-ecommerce-page/",
+                "codeUrl": "https://github.com/joaogalimberti/solene-ecommerce-page"
             },
-            "techdocs": {
-                "title": "Documentação Técnica Interativa",
-                "desc": "Página de documentação técnica limpa, organizada e responsiva, desenvolvida com HTML, CSS e JavaScript, com navegação intuitiva, foco em acessibilidade e estrutura ideal para aprendizado rápido em múltiplos dispositivos."
+            {
+                "id": "oliva",
+                "number": "03",
+                "title": "Oliva",
+                "desc": "Lista inteligente com CRUD completo, persistência offline e API REST com HTML, CSS e JS puros. No desktop roda dentro de uma moldura de smartphone.",
+                "tags": ["HTML", "CSS", "JavaScript", "Vite"],
+                "liveUrl": "https://joaogalimberti.github.io/smart-shopping/",
+                "codeUrl": "https://github.com/joaogalimberti/smart-shopping"
+            },
+            {
+                "id": "strevo",
+                "number": "04",
+                "title": "Strevo",
+                "desc": "App de constância em treinos com visual futurista dark, estatísticas gamificadas e geração de stories. 100% no cliente.",
+                "tags": ["Fitness", "Dark UI", "Gamificação"],
+                "liveUrl": "https://joaogalimberti.github.io/strevo/",
+                "codeUrl": "https://github.com/joaogalimberti/strevo"
+            },
+            {
+                "id": "dengue",
+                "number": "05",
+                "title": "Missão Dengue",
+                "desc": "Jogo educativo em React, TypeScript e Phaser para combate à dengue, com IA de mosquitos, inseticida, pontuação e design responsivo.",
+                "tags": ["React", "TypeScript", "Phaser"],
+                "liveUrl": "https://joaogalimberti.github.io/dengue-mission/",
+                "codeUrl": "https://github.com/joaogalimberti/dengue-mission"
             }
-        }
+        ]
     },
     "contact": {
         "number": "05 | CONTATO",
