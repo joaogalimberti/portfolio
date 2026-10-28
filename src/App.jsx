@@ -1,13 +1,15 @@
+import { lazy, Suspense } from "react";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Skills from "./components/Skills/Skills";
-import Pricing from "./components/Pricing/Pricing";
-import Projects from "./components/Projects/Projects";
-import Contact from "./components/Contact/Contact";
-import Footer from "./components/Footer/Footer";
-
 import useScrollReveal from "./hooks/useScrollReveal";
+
+// Lazy-load below-fold sections to improve initial load time
+const About = lazy(() => import("./components/About/About"));
+const Skills = lazy(() => import("./components/Skills/Skills"));
+const Pricing = lazy(() => import("./components/Pricing/Pricing"));
+const Projects = lazy(() => import("./components/Projects/Projects"));
+const Contact = lazy(() => import("./components/Contact/Contact"));
+const Footer = lazy(() => import("./components/Footer/Footer"));
 
 function App() {
   useScrollReveal(); // ← ativa o reveal no site inteiro
@@ -17,13 +19,17 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <About />
-        <Skills />
-        <Pricing />
-        <Projects />
-        <Contact />
+        <Suspense fallback={null}>
+          <About />
+          <Skills />
+          <Pricing />
+          <Projects />
+          <Contact />
+        </Suspense>
       </main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </>
   );
 }

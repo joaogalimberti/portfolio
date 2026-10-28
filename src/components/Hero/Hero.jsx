@@ -13,6 +13,10 @@ export default function Hero() {
     const el = contentRef.current;
     if (!el) return;
 
+    // Skip parallax on touch/mobile devices
+    const isTouch = window.matchMedia("(hover: none)").matches || window.innerWidth <= 768;
+    if (isTouch) return;
+
     const handleMove = (e) => {
       const { innerWidth: W, innerHeight: H } = window;
       mouseRef.current.tx = ((e.clientX / W) - 0.5) * 14;

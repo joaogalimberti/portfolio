@@ -101,6 +101,7 @@
         "items": [
             {
                 "id": "praeso",
+                "displayUrl": "app.praeso.com.br",
                 "number": "01",
                 "title": "Praeso",
                 "desc": "Plataforma full-stack de agendamentos que reduz faltas com confirmações em tempo real, dashboards inteligentes e gestão segura de clientes.",
@@ -110,6 +111,7 @@
             },
             {
                 "id": "solene",
+                "displayUrl": "solene.store",
                 "number": "02",
                 "title": "Solène — E-commerce",
                 "desc": "Plataforma de moda em linho europeu: catálogo dinâmico, carrinho em tempo real, filtros, busca e design responsivo.",
@@ -119,6 +121,7 @@
             },
             {
                 "id": "oliva",
+                "displayUrl": "oliva.app",
                 "number": "03",
                 "title": "Oliva",
                 "desc": "Lista inteligente com CRUD completo, persistência offline e API REST com HTML, CSS e JS puros. No desktop roda dentro de uma moldura de smartphone.",
@@ -128,6 +131,7 @@
             },
             {
                 "id": "strevo",
+                "displayUrl": "strevo.app",
                 "number": "04",
                 "title": "Strevo",
                 "desc": "App de constância em treinos com visual futurista dark, estatísticas gamificadas e geração de stories. 100% no cliente.",
@@ -137,6 +141,7 @@
             },
             {
                 "id": "dengue",
+                "displayUrl": "missaodengue.com.br",
                 "number": "05",
                 "title": "Missão Dengue",
                 "desc": "Jogo educativo em React, TypeScript e Phaser para combate à dengue, com IA de mosquitos, inseticida, pontuação e design responsivo.",

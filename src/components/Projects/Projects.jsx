@@ -23,6 +23,12 @@ export default function Projects() {
   const timerRef = useRef(null);
 
   const projects = t("projects.items", { returnObjects: true }) || [];
+  const currentProject = (Array.isArray(projects) && projects[cur]) || {};
+  const displayUrl = currentProject.displayUrl || (
+    currentProject.liveUrl
+      ? currentProject.liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')
+      : 'app.praeso.com.br'
+  );
 
   // Auto-advance projects every 7 seconds when not hovered
   useEffect(() => {
@@ -112,37 +118,74 @@ export default function Projects() {
             onPointerLeave={handlePointerLeave}
           >
             <div ref={devRef} className={styles.dev}>
-              {/* Desktop Monitor */}
+              {/* Desktop Monitor — with browser chrome */}
               <div className={styles.mon}>
+                <div className={styles.monBar}>
+                  <div className={styles.monDots}>
+                    <span /><span /><span />
+                  </div>
+                  <div className={styles.monUrl}>
+                    <div className={styles.monUrlDot} />
+                    <span key={cur} className={styles.monUrlText}>{displayUrl}</span>
+                  </div>
+                </div>
                 <div className={styles.sc}>
-                  {/* Slide 0: Praeso */}
+                  {/* Slide 0: Praeso — matches real site layout */}
                   <div className={`${styles.sn} ${cur === 0 ? styles.on : ""}`}>
                     <div className={`${styles.ui} ${styles.uPraeso}`}>
-                      <div className={styles.h1}>
-                        <span>Praeso</span>
-                        <i>Hoje · 12 agendamentos</i>
-                      </div>
-                      <div className={styles.st3}>
-                        <div className={styles.kp}><b>92%</b><div className={styles.ln} style={{ width: "70%" }} /></div>
-                        <div className={styles.kp}><b>12</b><div className={styles.ln} style={{ width: "60%" }} /></div>
-                        <div className={styles.kp}><b>3</b><div className={styles.ln} style={{ width: "50%" }} /></div>
-                      </div>
-                      {[
-                        { w: "55%", i: 0 },
-                        { w: "45%", i: 1 },
-                        { w: "60%", i: 2 },
-                        { w: "50%", i: 3 }
-                      ].map((item) => (
-                        <div
-                          key={`appt-d-${item.i}`}
-                          className={`${styles.ap} ${checkedAppts[item.i] ? styles.ok : ""}`}
-                          onClick={() => toggleAppt(item.i)}
-                        >
-                          <div className={styles.av} />
-                          <div className={styles.ln} style={{ width: item.w, margin: 0, flex: 1 }} />
-                          <i className={styles.dt} />
+                      {/* Top nav */}
+                      <div className={styles.praesoNav}>
+                        <div className={styles.praesoLogo}>
+                          <div className={styles.praesoLogoDot} />
+                          <span>PRAESO</span>
                         </div>
-                      ))}
+                        <div className={styles.praesoNavLinks}>
+                          <span>Simulador</span>
+                          <span>Calculadora</span>
+                          <span>Comparativo</span>
+                        </div>
+                        <div className={styles.praesoNavCta}>Testar grátis →</div>
+                      </div>
+                      {/* Two-panel body */}
+                      <div className={styles.praesoBody}>
+                        {/* Left: Agenda */}
+                        <div className={styles.praesoPanel}>
+                          <div className={styles.praesoPanelHeader}>Agenda do dia</div>
+                          <div className={styles.praesoSubtitle}>Dra. Camila Santos · Consultório 2</div>
+                          {[
+                            { time: "08:30", badge: "confirmed", label: "Confirmado" },
+                            { time: "10:00", badge: "confirmed", label: "Confirmado" },
+                            { time: "11:30", badge: "pending",   label: "Aguardando" },
+                            { time: "14:00", badge: "synced",    label: "Sincronizado" }
+                          ].map((appt, i) => (
+                            <div key={`pa-${i}`} className={styles.praesoAppt} onClick={() => toggleAppt(i)}>
+                              <span className={styles.praesoTime}>{appt.time}</span>
+                              <div className={styles.praesoAv} />
+                              <div className={styles.praesoApptName}>
+                                <div className={styles.ln} style={{ width: "70%", margin: 0, marginBottom: "0.25em" }} />
+                                <div className={styles.ln} style={{ width: "45%", margin: 0 }} />
+                              </div>
+                              <span className={`${styles.praesoBadge} ${styles[appt.badge]}`}>{appt.label}</span>
+                            </div>
+                          ))}
+                        </div>
+                        {/* Right: WhatsApp confirmations */}
+                        <div className={styles.praesoPanel}>
+                          <div className={styles.praesoPanelHeader}>Confirmações ativas · Canal WhatsApp · IA</div>
+                          <div className={styles.praesoWaMsg}>
+                            Oi, Mariana! Confirmando sua consulta com a Dra. Camila amanhã às 10:00. Você confirma?
+                          </div>
+                          <div className={styles.praesoWaReply}>
+                            Sim, confirmo! Estarei lá no horário.
+                          </div>
+                          <div className={styles.praesoWaMsg}>
+                            Eduardo, sua consulta às 08:30 está confirmada. ✓
+                          </div>
+                          <div className={styles.praesoSyncBadge}>
+                            ● Agenda atualizada automaticamente
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -254,24 +297,32 @@ export default function Projects() {
                   {/* Phone Slide 0: Praeso */}
                   <div className={`${styles.sn} ${cur === 0 ? styles.on : ""}`}>
                     <div className={`${styles.ui} ${styles.uPraeso}`}>
-                      <div className={styles.h1}>Praeso</div>
-                      <div className={styles.st3} style={{ gridTemplateColumns: "1fr 1fr" }}>
-                        <div className={styles.kp}><b>92%</b></div>
-                        <div className={styles.kp}><b>12</b></div>
+                      <div className={styles.h1}>
+                        <span>Praeso</span>
+                        <i>12 hoje</i>
+                      </div>
+                      <div className={styles.st3} style={{ gridTemplateColumns: "1fr 1fr", gap: "4%" }}>
+                        <div className={styles.kp}><b>92%</b><div className={styles.ln} style={{ width: "80%" }} /></div>
+                        <div className={styles.kp}><b>12</b><div className={styles.ln} style={{ width: "60%" }} /></div>
                       </div>
                       {[
-                        { w: "60%", i: 0 },
-                        { w: "50%", i: 1 },
-                        { w: "65%", i: 2 }
-                      ].map((item) => (
+                        { time: "08:30", badge: "confirmed", i: 0 },
+                        { time: "10:00", badge: "confirmed", i: 1 },
+                        { time: "11:30", badge: "pending",   i: 2 }
+                      ].map((appt) => (
                         <div
-                          key={`appt-p-${item.i}`}
-                          className={`${styles.ap} ${checkedAppts[item.i] ? styles.ok : ""}`}
-                          onClick={() => toggleAppt(item.i)}
+                          key={`appt-p-${appt.i}`}
+                          className={styles.praesoAppt}
+                          onClick={() => toggleAppt(appt.i)}
                         >
-                          <div className={styles.av} />
-                          <div className={styles.ln} style={{ width: item.w, margin: 0, flex: 1 }} />
-                          <i className={styles.dt} />
+                          <span className={styles.praesoTime}>{appt.time}</span>
+                          <div className={styles.praesoAv} />
+                          <div className={styles.praesoApptName}>
+                            <div className={styles.ln} style={{ width: "70%", margin: 0 }} />
+                          </div>
+                          <span className={`${styles.praesoBadge} ${styles[appt.badge]}`}>
+                            {appt.badge === "confirmed" ? "✓" : "..."}
+                          </span>
                         </div>
                       ))}
                     </div>

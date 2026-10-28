@@ -7,7 +7,7 @@
 
 .pj {
   display: grid;
-  grid-template-columns: 1.32fr 1fr;
+  grid-template-columns: 1.35fr 1fr;
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
   margin-top: clamp(32px, 5vw, 56px);
@@ -37,7 +37,9 @@
   }
 }
 
-/* 3D Stage */
+/* =============================================
+   3D Stage
+   ============================================= */
 .stage {
   position: relative;
   aspect-ratio: 5 / 4;
@@ -45,17 +47,17 @@
   perspective: 1300px;
   display: grid;
   place-items: center;
-  background: radial-gradient(circle at 50% 30%, #ffffff, #e4e7ec 78%);
-  box-shadow: 0 24px 70px rgba(30, 40, 60, 0.08), inset 0 1px 0 #ffffff;
+  background: radial-gradient(ellipse at 50% 0%, #f0f2f7 0%, #dde1ea 100%);
+  box-shadow: 0 32px 80px rgba(30, 40, 60, 0.1), inset 0 1px 0 #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   overflow: hidden;
   user-select: none;
 }
 
 :global([data-theme='dark']) .stage {
-  background: radial-gradient(circle at 50% 30%, #1e222b, #111318 78%);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: radial-gradient(ellipse at 50% 0%, #1e222d 0%, #0f1118 100%);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .dev {
@@ -66,32 +68,116 @@
   transition: transform 0.25s ease-out;
 }
 
-/* Desktop Monitor */
+/* Desktop Monitor — browser-window style */
 .mon {
   width: 86%;
   margin: 0 auto;
   aspect-ratio: 16 / 10;
-  background: #16171a;
-  border-radius: 14px;
-  padding: 2.2%;
-  box-shadow: 0 30px 60px rgba(20, 30, 50, 0.22);
+  background: #1c1e24;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: 0 28px 56px rgba(20, 30, 50, 0.28);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 :global([data-theme='dark']) .mon {
-  background: #0f1013;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  background: #0d0f14;
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.65);
 }
 
+/* Browser chrome / top bar */
+.monBar {
+  flex: none;
+  height: 8%;
+  background: #2a2d36;
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  padding: 0 4%;
+}
+
+:global([data-theme='dark']) .monBar {
+  background: #1a1c24;
+}
+
+.monDots {
+  display: flex;
+  gap: 5px;
+  flex: none;
+}
+
+.monDots span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.monDots span:nth-child(1) { background: #ff5f57; }
+.monDots span:nth-child(2) { background: #febc2e; }
+.monDots span:nth-child(3) { background: #28c840; }
+
+.monUrl {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  height: 55%;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 5px;
+}
+
+.monUrlDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  flex: none;
+}
+
+.monUrlText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.6cqw;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: fadeInUrl 0.35s ease;
+}
+
+@keyframes fadeInUrl {
+  from {
+    opacity: 0.3;
+    transform: translateY(-1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.sc {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  container-type: inline-size;
+}
+
+/* Monitor stand & base */
 .stand {
   width: 12%;
   aspect-ratio: 3 / 1;
   margin: 0 auto;
-  background: linear-gradient(90deg, #b4b8be, #eceef0, #b4b8be);
+  background: linear-gradient(90deg, #b0b4ba, #eceff2, #b0b4ba);
 }
 
 :global([data-theme='dark']) .stand {
-  background: linear-gradient(90deg, #2a2d34, #3d414a, #2a2d34);
+  background: linear-gradient(90deg, #252830, #3a3d48, #252830);
 }
 
 .base {
@@ -99,43 +185,52 @@
   aspect-ratio: 14 / 1;
   margin: 0 auto;
   border-radius: 99px;
-  background: linear-gradient(#d4d7db, #a9adb3);
+  background: linear-gradient(#d0d3d8, #a6aab0);
 }
 
 :global([data-theme='dark']) .base {
-  background: linear-gradient(#444852, #2a2d34);
+  background: linear-gradient(#40444e, #282b34);
 }
 
-.sc {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 6px;
-  overflow: hidden;
-  background: #ffffff;
-  container-type: inline-size;
-}
-
-/* Mobile Phone */
+/* Mobile Phone — modern frameless design */
 .ph {
   position: absolute;
-  right: -1%;
-  bottom: 6%;
-  width: 20%;
-  aspect-ratio: 9 / 18.5;
-  background: #111111;
-  border-radius: 18px;
-  padding: 3.5%;
-  transform: translateZ(70px);
-  box-shadow: 0 24px 44px rgba(0, 0, 0, 0.35);
+  right: -2%;
+  bottom: 7%;
+  width: 18%;
+  aspect-ratio: 9 / 19;
+  background: linear-gradient(160deg, #2a2c33 0%, #121318 100%);
+  border-radius: 20px;
+  padding: 3.5px;
+  transform: translateZ(80px);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Pill notch */
+.ph::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24%;
+  height: 3.5%;
+  background: #0d0f14;
+  border-radius: 99px;
+  z-index: 20;
 }
 
 .phs {
   position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
+  flex: 1;
+  border-radius: 16.5px;
   overflow: hidden;
   background: #ffffff;
   container-type: inline-size;
@@ -167,21 +262,239 @@
 }
 
 .phs .ui {
-  font-size: 6.5cqw;
+  font-size: 7cqw;
 }
 
 .ln {
   height: 0.55em;
   border-radius: 99px;
-  background: rgba(0, 0, 0, 0.13);
+  background: rgba(0, 0, 0, 0.12);
   margin-top: 0.5em;
 }
 
-/* Project 1: Praeso UI */
+/* =============================================
+   Project 1: Praeso UI — matches real site design
+   ============================================= */
 .uPraeso {
-  background: #fafafa;
-  padding: 4%;
+  background: #f8f9fa;
+  padding: 0;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Praeso top nav bar */
+.praesoNav {
+  flex: none;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  padding: 0 3%;
+  height: 10%;
+  gap: 4%;
+}
+
+.praesoLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-weight: 700;
+  font-size: 1em;
+  color: #111;
+  flex: none;
+}
+
+.praesoLogoDot {
+  width: 1.3em;
+  height: 1.3em;
+  background: #2e5d3a;
+  border-radius: 50%;
+  flex: none;
+}
+
+.praesoNavLinks {
+  display: flex;
+  gap: 4%;
+  flex: 1;
+  margin-left: 2%;
+}
+
+.praesoNavLinks span {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72em;
+  color: #555;
+}
+
+.praesoNavCta {
+  background: #1a3a24;
+  color: #fff;
+  border-radius: 0.5em;
+  padding: 0.45em 0.9em;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72em;
+  font-weight: 600;
+  flex: none;
+}
+
+/* Praeso main content: two-panel layout */
+.praesoBody {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2%;
+  padding: 3%;
+  overflow: hidden;
+}
+
+.praesoPanel {
+  background: #ffffff;
+  border-radius: 0.8em;
+  border: 1px solid rgba(0,0,0,0.07);
+  padding: 4%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.praesoPanelHeader {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.6em;
+  font-weight: 700;
+  color: #888;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.praesoSubtitle {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.2em;
+}
+
+.praesoAppt {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.55em 0.6em;
+  border-radius: 0.5em;
+  background: #f8f9fa;
+  border: 1px solid rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.praesoAppt:hover {
+  transform: translateY(-1px);
+}
+
+.praesoTime {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.62em;
+  font-weight: 700;
+  color: #444;
+  min-width: 2.4em;
+  flex: none;
+}
+
+.praesoAv {
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b8d4c2, #7aad94);
+  flex: none;
+}
+
+.praesoApptName {
+  flex: 1;
+}
+
+.praesoApptName .ln {
+  margin: 0;
+  margin-bottom: 0.25em;
+}
+
+.praesoBadge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.6em;
+  font-weight: 600;
+  padding: 0.2em 0.6em;
+  border-radius: 99px;
+  flex: none;
+}
+
+.praesoBadge.confirmed {
+  background: rgba(39, 174, 96, 0.12);
+  color: #1e7a46;
+}
+
+.praesoBadge.pending {
+  background: rgba(242, 153, 74, 0.12);
+  color: #b56b14;
+}
+
+.praesoBadge.synced {
+  background: rgba(41, 128, 185, 0.12);
+  color: #1a5f8a;
+}
+
+/* WhatsApp confirmation panel */
+.praesoWaMsg {
+  background: #f0f4f0;
+  border-radius: 0.6em;
+  padding: 0.6em 0.7em;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.62em;
+  color: #333;
+  line-height: 1.4;
+}
+
+.praesoWaReply {
+  background: #1a7a46;
+  border-radius: 0.6em;
+  padding: 0.55em 0.8em;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.62em;
+  color: #ffffff;
+  line-height: 1.4;
+  margin-left: 10%;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.praesoWaReply::after {
+  content: "✓✓";
+  font-size: 0.85em;
+  opacity: 0.7;
+  flex: none;
+}
+
+.praesoSyncBadge {
+  background: rgba(39, 174, 96, 0.1);
+  border-radius: 0.5em;
+  padding: 0.4em 0.6em;
+  font-size: 0.62em;
+  color: #1e7a46;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: auto;
+}
+
+/* Phone Praeso mockup */
+.phs .uPraeso {
+  padding: 6% 5%;
+  font-size: 7cqw;
+  display: block;
+  background: #f8f9fa;
 }
 
 .h1 {
@@ -191,14 +504,14 @@
   font-family: var(--font-display, 'Syne', sans-serif);
   font-weight: 700;
   font-size: 1.3em;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   margin-bottom: 4%;
   color: #111;
 }
 
 .h1 i {
-  font-family: var(--font-main, 'Inter', sans-serif);
-  font-size: 0.75em;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72em;
   font-weight: 500;
   letter-spacing: 0;
   font-style: normal;
@@ -249,7 +562,7 @@
   width: 1.6em;
   height: 1.6em;
   border-radius: 50%;
-  background: linear-gradient(135deg, #ccd5e8, #9aaed6);
+  background: linear-gradient(135deg, #b8d4c2, #7aad94);
   flex: none;
 }
 
@@ -278,9 +591,11 @@
   }
 }
 
-/* Project 2: Solène UI */
+/* =============================================
+   Project 2: Solène UI
+   ============================================= */
 .uSolene {
-  background: #f6f2ea;
+  background: #f4ede2;
   padding: 4%;
   height: 100%;
 }
@@ -319,29 +634,31 @@
   margin-top: 1em;
 }
 
-/* Project 3: Oliva UI */
+/* =============================================
+   Project 3: Oliva UI
+   ============================================= */
 .uOliva {
-  background: #e6e8d6;
+  background: #e8ead8;
   height: 100%;
   display: grid;
   place-items: center;
 }
 
 .phs .uOliva {
-  background: #fbf9f1;
+  background: #f5f3ea;
   padding: 8% 7%;
   display: block;
 }
 
 .mini {
-  width: 34%;
+  width: 32%;
   aspect-ratio: 9 / 17;
   background: #fbf9f1;
-  border: 0.3em solid #1b1b1b;
-  border-radius: 1.6em;
-  padding: 1.2em;
+  border: 0.12em solid #1b1b1b;
+  border-radius: 1.1em;
+  padding: 0.8em;
   overflow: hidden;
-  box-shadow: 0 0.8em 2em rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0.8em 2em rgba(0, 0, 0, 0.14);
 }
 
 .phs .mini {
@@ -402,7 +719,9 @@
   opacity: 0.3;
 }
 
-/* Project 4: Strevo UI */
+/* =============================================
+   Project 4: Strevo UI
+   ============================================= */
 .uStrevo {
   background: #0a0c12;
   color: #ffffff;
@@ -492,7 +811,9 @@
   }
 }
 
-/* Project 5: Dengue Mission UI */
+/* =============================================
+   Project 5: Dengue Mission UI
+   ============================================= */
 .uDengue {
   background: linear-gradient(#cfe9f0, #dff3da 70%);
   height: 100%;
@@ -581,7 +902,9 @@
   }
 }
 
-/* Project List (Right side) */
+/* =============================================
+   Project List (Right side)
+   ============================================= */
 .pjList {
   display: flex;
   flex-direction: column;
@@ -604,7 +927,7 @@
 }
 
 .pi small {
-  font-family: var(--font-mono, 'Space Grotesk', sans-serif);
+  font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 12px;
   letter-spacing: 0.14em;
   color: #777;
@@ -646,7 +969,7 @@
 
 .pd p {
   margin-top: 12px;
-  font-family: var(--font-main, 'Inter', sans-serif);
+  font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 15px;
   line-height: 1.6;
   color: #666;
@@ -666,7 +989,7 @@
 }
 
 .tagPill {
-  font-family: var(--font-main, 'Inter', sans-serif);
+  font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 12px;
   font-weight: 500;
   padding: 5px 12px;
@@ -721,7 +1044,7 @@
   border: 1.5px solid var(--text-color, #0b0b0b);
   color: var(--text-color, #0b0b0b);
   text-decoration: none;
-  font-family: var(--font-main, 'Inter', sans-serif);
+  font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 13px;
   font-weight: 600;
   transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;

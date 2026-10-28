@@ -49,6 +49,10 @@ export default function HeroBackground() {
     const canvas = canvasRef.current;
     if (!container || !canvas) return;
 
+    // Skip heavy canvas animation on touch/mobile devices
+    const isTouch = window.matchMedia("(hover: none)").matches || window.innerWidth <= 768;
+    if (isTouch) return;
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 

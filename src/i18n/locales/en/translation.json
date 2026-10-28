@@ -101,6 +101,7 @@
         "items": [
             {
                 "id": "praeso",
+                "displayUrl": "app.praeso.com",
                 "number": "01",
                 "title": "Praeso",
                 "desc": "Full-stack appointment booking platform that reduces client no-shows through real-time notifications, intelligent dashboards, and secure authentication.",
@@ -110,6 +111,7 @@
             },
             {
                 "id": "solene",
+                "displayUrl": "solene.store",
                 "number": "02",
                 "title": "Solène — E-commerce",
                 "desc": "Luxury European linen e-commerce platform with dynamic catalog, interactive cart drawer, smart search, and fluid responsiveness.",
@@ -119,6 +121,7 @@
             },
             {
                 "id": "oliva",
+                "displayUrl": "oliva.app",
                 "number": "03",
                 "title": "Oliva",
                 "desc": "Intelligent grocery list application with full CRUD, offline-first persistence, and REST API built in pure vanilla JS. On desktop, it renders in an interactive smartphone frame.",
@@ -128,6 +131,7 @@
             },
             {
                 "id": "strevo",
+                "displayUrl": "strevo.app",
                 "number": "04",
                 "title": "Strevo",
                 "desc": "Workout consistency app with cyberpunk dark aesthetic, gamified progress statistics, and automated shareable story cards. 100% client-side.",
@@ -137,6 +141,7 @@
             },
             {
                 "id": "dengue",
+                "displayUrl": "dengue-mission.game",
                 "number": "05",
                 "title": "Dengue Mission",
                 "desc": "Educational arcade game built with React, TypeScript, and Phaser. Features mosquito AI pathfinding, repellent mechanics, score tracking, and responsive layout.",
