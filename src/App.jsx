@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
-import Header from "./components/Header/Header";
+import Navigation from "./components/Navigation/Navigation";
+import LivingExperience from "./components/LivingExperience/LivingExperience";
 import Hero from "./components/Hero/Hero";
 import useScrollReveal from "./hooks/useScrollReveal";
 
@@ -16,7 +17,8 @@ function App() {
 
   return (
     <>
-      <Header />
+      <LivingExperience />
+      <Navigation />
       <main>
         <Hero />
         <Suspense fallback={null}>

@@ -56,25 +56,34 @@ export default function AboutDemo() {
     };
   }, [updatePosition]);
 
-  // Auto-demonstrate when scrolled into view
+  // Auto-demonstrate dynamically with scroll (like inspiration)
   useEffect(() => {
     const demoEl = demoRef.current;
     if (!demoEl) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimatedRef.current) {
-          hasAnimatedRef.current = true;
-          setTimeout(() => {
-            setTx(65);
-          }, 400);
-        }
-      },
-      { threshold: 0.3 }
-    );
+    let userInteracted = false;
+    const onUserInteract = () => {
+      userInteracted = true;
+    };
 
-    observer.observe(demoEl);
-    return () => observer.disconnect();
+    demoEl.addEventListener("pointerdown", onUserInteract);
+
+    const handleScroll = () => {
+      if (userInteracted || isDraggingRef.current) return;
+      const rect = demoEl.getBoundingClientRect();
+      const H = window.innerHeight;
+      const p = (H - rect.top) / (H + rect.height);
+      if (p > 0.12 && p < 0.95) {
+        const autoX = Math.max(6, Math.min(94, ((p - 0.22) / 0.46) * 100));
+        setTx(autoX);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      demoEl.removeEventListener("pointerdown", onUserInteract);
+    };
   }, []);
 
   const handlePointerDown = (e) => {
@@ -101,6 +110,7 @@ export default function AboutDemo() {
   return (
     <div
       ref={demoRef}
+      data-parallax="demo"
       className={styles.demo}
       style={{ '--x': `${cx.toFixed(2)}%` }}
       tabIndex={0}

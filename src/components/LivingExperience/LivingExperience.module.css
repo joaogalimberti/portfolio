@@ -1,0 +1,49 @@
+/* Ambient dynamic moving glow background */
+.ambientGlow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  will-change: background;
+}
+
+/* Top Scroll Progress bar */
+.progressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ffffff;
+  mix-blend-mode: difference;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 60;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Custom interactive trailing cursor ring */
+.cursorRing {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 1.5px solid #ffffff;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 70;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+
+@media (pointer: coarse), (max-width: 768px) {
+  .cursorRing {
+    display: none !important;
+  }
+}
+

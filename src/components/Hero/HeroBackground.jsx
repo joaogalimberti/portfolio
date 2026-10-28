@@ -1,30 +1,80 @@
-import { useEffect, useRef } from 'react';
-import styles from './HeroBackground.module.css';
+import { useEffect, useRef } from "react";
+import styles from "./HeroBackground.module.css";
 
-const TECH_LOGOS = {
-  React: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg',
-  TypeScript: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
-  'Node.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg',
-  PostgreSQL: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
-  'Next.js': 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg',
-  Docker: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
-  Git: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
-  Tailwind: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg'
+const SVGS = {
+  React: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#61dafb" strokeWidth="1.1">
+      <ellipse cx="12" cy="12" rx="10" ry="4" />
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
+      <circle cx="12" cy="12" r="1.8" fill="#61dafb" />
+    </svg>
+  ),
+  TypeScript: (
+    <svg viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="3" fill="#3178c6" />
+      <text x="12" y="17" fontSize="10" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="Inter,sans-serif">TS</text>
+    </svg>
+  ),
+  "Node.js": (
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2l9 5v10l-9 5-9-5V7z" fill="#5fa04e" />
+      <text x="12" y="15.5" fontSize="8" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="Inter,sans-serif">JS</text>
+    </svg>
+  ),
+  PostgreSQL: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="#336791" strokeWidth="1.6">
+      <ellipse cx="12" cy="6" rx="8" ry="3" />
+      <path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
+    </svg>
+  ),
+  "Next.js": (
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="10" fill="#111" />
+      <path d="M9 8v8M9 8l7 9M16 8v5" stroke="#fff" strokeWidth="1.6" fill="none" />
+    </svg>
+  ),
+  Docker: (
+    <svg viewBox="0 0 24 24" fill="#2496ed">
+      <rect x="4" y="9" width="3" height="3" />
+      <rect x="8" y="9" width="3" height="3" />
+      <rect x="12" y="9" width="3" height="3" />
+      <rect x="8" y="5.5" width="3" height="3" />
+      <rect x="12" y="5.5" width="3" height="3" />
+      <path d="M2 13h18c1-1 2-1 2.5-2-1-.5-2-.3-2.5.3-.3-1-1-1.5-1.5-1.8C18 11 18 13 17 15c-2 4-6 5-9 5-3 0-5-2-6-7z" />
+    </svg>
+  ),
+  Git: (
+    <svg viewBox="0 0 24 24">
+      <rect x="4.5" y="4.5" width="15" height="15" rx="2" transform="rotate(45 12 12)" fill="#f05032" />
+      <g stroke="#fff" strokeWidth="1.5" fill="#fff">
+        <path d="M9 9l5 3M9 9v7" fill="none" />
+        <circle cx="9" cy="9" r="1.6" />
+        <circle cx="14" cy="12" r="1.6" />
+        <circle cx="9" cy="16" r="1.6" />
+      </g>
+    </svg>
+  ),
+  Tailwind: (
+    <svg viewBox="0 0 24 24" fill="#38bdf8">
+      <path d="M12 6c-2.7 0-4.4 1.3-5 4 1-1.3 2.2-1.8 3.5-1.5.8.2 1.3.7 1.9 1.3C13.4 10.8 14.5 12 17 12c2.7 0 4.4-1.3 5-4-1 1.3-2.2 1.8-3.5 1.5-.8-.2-1.3-.7-1.9-1.3C15.6 7.2 14.5 6 12 6zM7 12c-2.7 0-4.4 1.3-5 4 1-1.3 2.2-1.8 3.5-1.5.8.2 1.3.7 1.9 1.3C8.4 16.8 9.5 18 12 18c2.7 0 4.4-1.3 5-4-1 1.3-2.2 1.8-3.5 1.5-.8-.2-1.3-.7-1.9-1.3C10.6 13.2 9.5 12 7 12z" />
+    </svg>
+  ),
 };
 
 const NODES_DATA = [
-  ['React', 62, 22],
-  ['TypeScript', 82, 18],
-  ['Node.js', 70, 48],
-  ['PostgreSQL', 90, 46],
-  ['Next.js', 54, 70],
-  ['Docker', 78, 76],
-  ['Git', 92, 78],
-  ['Tailwind', 46, 38],
-  ['Node.js', 36, 84]
+  ["React", 62, 22],
+  ["TypeScript", 82, 18],
+  ["Node.js", 70, 48],
+  ["PostgreSQL", 90, 46],
+  ["Next.js", 54, 70],
+  ["Docker", 78, 76],
+  ["Git", 92, 78],
+  ["Tailwind", 46, 38],
+  ["Node.js", 36, 84],
 ];
 
-const GRAPH_EDGES = [
+const EDGES_DATA = [
   [0, 1], [0, 2], [1, 3], [2, 3], [2, 4], [4, 5],
   [5, 6], [3, 6], [0, 7], [7, 2], [4, 8], [7, 4]
 ];
@@ -32,7 +82,7 @@ const GRAPH_EDGES = [
 function rng(a) {
   return () => {
     a |= 0;
-    a = (a + 0x6D2B79F5) | 0;
+    a = (a + 0x6d2b79f5) | 0;
     let t = Math.imul(a ^ (a >>> 15), 1 | a);
     t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
@@ -42,18 +92,14 @@ function rng(a) {
 export default function HeroBackground() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  const nodeElementsRef = useRef([]);
+  const nodeElsRef = useRef([]);
 
   useEffect(() => {
     const container = containerRef.current;
-    const canvas = canvasRef.current;
-    if (!container || !canvas) return;
+    const cv = canvasRef.current;
+    if (!container || !cv) return;
 
-    // Skip heavy canvas animation on touch/mobile devices
-    const isTouch = window.matchMedia("(hover: none)").matches || window.innerWidth <= 768;
-    if (isTouch) return;
-
-    const ctx = canvas.getContext('2d');
+    const ctx = cv.getContext("2d");
     if (!ctx) return;
 
     let animId;
@@ -69,8 +115,8 @@ export default function HeroBackground() {
     let last = performance.now();
 
     const getColors = () => {
-      const isDark = document.body.dataset.theme === 'dark';
-      return isDark ? '140,180,240' : '45,60,90';
+      const isDark = document.body.dataset.theme === "dark";
+      return isDark ? "130,175,255" : "45,60,90";
     };
 
     const build = () => {
@@ -79,12 +125,12 @@ export default function HeroBackground() {
       H = container.clientHeight;
       if (W === 0 || H === 0) return;
 
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
+      cv.width = W * dpr;
+      cv.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       const r = rng(7);
-      const cs = W < 700 ? 150 : 190;
+      const cs = W < 700 ? 85 : 105;
       V = [];
       Pl = [];
 
@@ -94,8 +140,8 @@ export default function HeroBackground() {
             x: x + r() * cs,
             y: y + r() * cs,
             g: 0,
-            r: 0.6 + r() * 0.7,
-            t: null
+            r: 1 + r() * 0.9,
+            t: null,
           });
         }
       }
@@ -105,8 +151,8 @@ export default function HeroBackground() {
           x: (x / 100) * W,
           y: (y / 100) * H,
           g: 0,
-          r: 2,
-          t: nodeElementsRef.current[i] || null
+          r: 3,
+          t: nodeElsRef.current[i] || null,
         });
       });
 
@@ -121,7 +167,7 @@ export default function HeroBackground() {
       Ed = [];
       Adj = V.map(() => []);
 
-      const addEdge = (a, b) => {
+      const add = (a, b) => {
         if (a === b) return;
         const k = a < b ? `${a}-${b}` : `${b}-${a}`;
         if (set.has(k)) return;
@@ -133,21 +179,21 @@ export default function HeroBackground() {
 
       V.forEach((v, i) => {
         const d = V.map((u, j) => [j, (u.x - v.x) ** 2 + (u.y - v.y) ** 2]).sort((p, q) => p[1] - q[1]);
-        const n = v.t ? 4 : 2;
+        const n = v.t ? 5 : 3;
         for (let m = 1; m <= n; m++) {
-          if (d[m]) addEdge(i, d[m][0]);
+          if (d[m]) add(i, d[m][0]);
         }
       });
 
-      const offset = V.length - NODES_DATA.length;
-      GRAPH_EDGES.forEach(([a, b]) => {
-        addEdge(offset + a, offset + b);
+      const o = V.length - NODES_DATA.length;
+      EDGES_DATA.forEach(([a, b]) => {
+        add(o + a, o + b);
       });
     };
 
     const spawn = (n) => {
       const l = Adj[n];
-      if (!l || !l.length || Pl.length > 30) return;
+      if (!l || !l.length || Pl.length > 70) return;
       const e = l[Math.floor(Math.random() * l.length)];
       const [a, b] = Ed[e];
       Pl.push({
@@ -155,21 +201,14 @@ export default function HeroBackground() {
         from: a === n ? a : b,
         to: a === n ? b : a,
         t: 0,
-        sp: 0.12 + Math.random() * 0.15
+        sp: 0.14 + Math.random() * 0.2,
       });
     };
 
     const onPointerMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const inX = e.clientX >= rect.left && e.clientX <= rect.right;
-      const inY = e.clientY >= rect.top && e.clientY <= rect.bottom;
-      if (inX && inY) {
-        mx = e.clientX - rect.left;
-        my = e.clientY - rect.top;
-      } else {
-        mx = -999;
-        my = -999;
-      }
+      const r = container.getBoundingClientRect();
+      mx = e.clientX - r.left;
+      my = e.clientY - r.top;
     };
 
     const onPointerLeave = () => {
@@ -177,24 +216,20 @@ export default function HeroBackground() {
       my = -999;
     };
 
-    window.addEventListener('pointermove', onPointerMove, { passive: true });
-    window.addEventListener('mouseleave', onPointerLeave, { passive: true });
+    container.addEventListener("pointermove", onPointerMove);
+    container.addEventListener("pointerleave", onPointerLeave);
 
-    const resizeObserver = new ResizeObserver(() => {
-      build();
-    });
+    const resizeObserver = new ResizeObserver(build);
     resizeObserver.observe(container);
     build();
 
     const frame = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-
       ctx.clearRect(0, 0, W, H);
       const COL = getColors();
-      const isDark = document.body.dataset.theme === 'dark';
 
-      const R = 150;
+      const R = 170;
       const near = [];
 
       V.forEach((v) => {
@@ -204,27 +239,27 @@ export default function HeroBackground() {
         let tx = 0;
         let ty = 0;
 
-        if (d < R && mx > 0 && my > 0) {
-          const k = (Math.pow(1 - d / R, 2) * (v.t ? 24 : 32)) / (d || 1);
+        if (d < R) {
+          const k = (Math.pow(1 - d / R, 2) * (v.t ? 26 : 38)) / (d || 1);
           tx = dx * k;
           ty = dy * k;
           near.push(v);
         }
 
-        const f = Math.min(1, dt * 2.5);
+        const f = Math.min(1, dt * 3);
         v.ox += (tx - v.ox) * f;
         v.oy += (ty - v.oy) * f;
         v.x = v.bx + v.ox;
         v.y = v.by + v.oy;
 
         if (v.t) {
-          v.t.style.transform = `translate(${v.ox.toFixed(1)}px, ${v.oy.toFixed(1)}px)`;
+          v.t.style.translate = `${v.ox.toFixed(1)}px ${v.oy.toFixed(1)}px`;
         }
       });
 
-      // Draw background grid lines (delicate and clean)
-      ctx.lineWidth = 0.75;
-      ctx.strokeStyle = `rgba(${COL}, ${isDark ? 0.04 : 0.024})`;
+      // Background mesh lines
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = `rgba(${COL}, 0.045)`;
       ctx.beginPath();
       Ed.forEach(([a, b]) => {
         if (V[a] && V[b]) {
@@ -234,26 +269,24 @@ export default function HeroBackground() {
       });
       ctx.stroke();
 
-      // Draw lines connected to pointer (interactive mouse web)
-      if (mx > 0 && my > 0) {
-        near.forEach((v) => {
-          const d = Math.hypot(mx - v.x, my - v.y);
-          ctx.strokeStyle = `rgba(${COL}, ${0.08 * (1 - d / R)})`;
-          ctx.lineWidth = 0.85;
-          ctx.beginPath();
-          ctx.moveTo(mx, my);
-          ctx.lineTo(v.x, v.y);
-          ctx.stroke();
-          v.g = Math.max(v.g, 0.45 * (1 - d / R));
-        });
-      }
+      // Mouse interactive constellation web
+      near.forEach((v) => {
+        const d = Math.hypot(mx - v.x, my - v.y);
+        ctx.strokeStyle = `rgba(${COL}, ${0.1 * (1 - d / R)})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(mx, my);
+        ctx.lineTo(v.x, v.y);
+        ctx.stroke();
+        v.g = Math.max(v.g, 0.3 * (1 - d / R));
+      });
 
-      // Spawn pulses along edges occasionally
-      if (Math.random() < dt * 0.75) {
-        const targetIndex = Math.random() < 0.3
+      // Spawn pulses along network
+      if (Math.random() < dt * 3) {
+        const target = Math.random() < 0.3
           ? V.length - 1 - Math.floor(Math.random() * NODES_DATA.length)
           : Math.floor(Math.random() * V.length);
-        spawn(targetIndex);
+        spawn(target);
       }
 
       for (let i = Pl.length - 1; i >= 0; i--) {
@@ -266,27 +299,28 @@ export default function HeroBackground() {
         }
 
         const len = Math.hypot(B.x - A.x, B.y - A.y) || 1;
-        p.t += (dt * p.sp * 160) / len;
+        p.t += (dt * p.sp * 200) / len;
 
         if (p.t >= 1) {
-          B.g = 0.6;
+          B.g = 1;
+          if (B.t) B.g = 1;
           Pl.splice(i, 1);
           const c = Math.random();
-          if (c < 0.6) spawn(p.to);
+          if (c < 0.8) spawn(p.to);
+          if (c < 0.3) spawn(p.to);
           continue;
         }
 
         const hx = A.x + (B.x - A.x) * p.t;
         const hy = A.y + (B.y - A.y) * p.t;
-        const tl = Math.min(p.t, 40 / len);
+        const tl = Math.min(p.t, 45 / len);
         const tx = A.x + (B.x - A.x) * (p.t - tl);
         const ty = A.y + (B.y - A.y) * (p.t - tl);
         const f = (Math.sin(Math.PI * p.t) * 0.9 + 0.1) * (B.t ? Math.min(1, (1 - p.t) / 0.3) : 1);
 
         const g = ctx.createLinearGradient(tx, ty, hx, hy);
         g.addColorStop(0, `rgba(${COL}, 0)`);
-        g.addColorStop(1, `rgba(${COL}, ${f * 0.22})`);
-
+        g.addColorStop(1, `rgba(${COL}, ${f * 0.4})`);
         ctx.strokeStyle = g;
         ctx.lineWidth = 1.1;
         ctx.beginPath();
@@ -294,22 +328,22 @@ export default function HeroBackground() {
         ctx.lineTo(hx, hy);
         ctx.stroke();
 
-        ctx.fillStyle = `rgba(${COL}, ${f * 0.3})`;
+        ctx.fillStyle = `rgba(${COL}, ${f * 0.55})`;
         ctx.beginPath();
-        ctx.arc(hx, hy, 1.2, 0, Math.PI * 2);
+        ctx.arc(hx, hy, 1.5, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // Draw vertices / dots (soft and minimal)
+      // Vertices / dots and tech node glowing halo
       V.forEach((v) => {
-        v.g = Math.max(0, v.g - dt * 0.5);
+        v.g = Math.max(0, v.g - dt * 0.6);
         if (!v.t) {
-          ctx.fillStyle = `rgba(${COL}, ${isDark ? 0.055 + v.g * 0.15 : 0.035 + v.g * 0.12})`;
+          ctx.fillStyle = `rgba(${COL}, ${0.08 + v.g * 0.35})`;
           ctx.beginPath();
-          ctx.arc(v.x, v.y, v.r + v.g * 0.9, 0, Math.PI * 2);
+          ctx.arc(v.x, v.y, v.r + v.g * 1.3, 0, Math.PI * 2);
           ctx.fill();
         } else {
-          v.t.style.setProperty('--g', (v.g * v.g * 0.5).toFixed(3));
+          v.t.style.setProperty("--g", (v.g * v.g * 0.6).toFixed(3));
         }
       });
 
@@ -321,39 +355,28 @@ export default function HeroBackground() {
     return () => {
       cancelAnimationFrame(animId);
       resizeObserver.disconnect();
-      window.removeEventListener('pointermove', onPointerMove);
-      window.removeEventListener('mouseleave', onPointerLeave);
+      container.removeEventListener("pointermove", onPointerMove);
+      container.removeEventListener("pointerleave", onPointerLeave);
     };
   }, []);
 
   return (
-    <div ref={containerRef} className={styles.backgroundContainer} aria-hidden="true">
+    <div ref={containerRef} className={styles.heroBg} aria-hidden="true">
       <canvas ref={canvasRef} className={styles.canvas} />
       <div className={styles.nodes}>
         {NODES_DATA.map(([name, x, y], index) => (
           <div
             key={`${name}-${index}`}
-            ref={(el) => (nodeElementsRef.current[index] = el)}
+            ref={(el) => (nodeElsRef.current[index] = el)}
             className={styles.node}
             style={{
               left: `${x}%`,
               top: `${y}%`,
-              animationDelay: `${-index * 0.9}s`
+              animationDelay: `${-index * 0.9}s`,
             }}
           >
-            <div className={styles.nodeSvg}>
-              {TECH_LOGOS[name] && (
-                <img
-                  src={TECH_LOGOS[name]}
-                  alt={`${name} icon`}
-                  width="24"
-                  height="24"
-                  loading="lazy"
-                  draggable="false"
-                />
-              )}
-            </div>
-            <span className={styles.nodeLabel}>{name}</span>
+            {SVGS[name]}
+            <span>{name}</span>
           </div>
         ))}
       </div>

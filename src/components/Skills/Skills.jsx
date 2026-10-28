@@ -88,7 +88,7 @@ export default function Skills() {
       <div className={`${styles.marqueeWrapper} reveal`}>
         {/* Row 1 - scrolling left */}
         <div className={styles.marquee}>
-          <div className={styles.track}>
+          <div className={styles.track} data-marquee-track="1" data-dir="-1">
             {[...ROW_1, ...ROW_1, ...ROW_1].map((name, index) => (
               <SkillOrbItem key={`row1-${name}-${index}`} name={name} />
             ))}
@@ -97,7 +97,7 @@ export default function Skills() {
 
         {/* Row 2 - scrolling right (reverse) */}
         <div className={styles.marquee}>
-          <div className={`${styles.track} ${styles.trackBack}`}>
+          <div className={`${styles.track} ${styles.trackBack}`} data-marquee-track="2" data-dir="1">
             {[...ROW_2, ...ROW_2, ...ROW_2].map((name, index) => (
               <SkillOrbItem key={`row2-${name}-${index}`} name={name} />
             ))}

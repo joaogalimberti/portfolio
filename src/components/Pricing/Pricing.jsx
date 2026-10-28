@@ -17,6 +17,7 @@ function PricingCard({ plan, isPopular, delayIndex }) {
   return (
     <div
       className={`${styles.card} ${isPopular ? styles.popularCard : ""}`}
+      data-pricing-card={delayIndex}
       style={{ transitionDelay: `${delayIndex * 0.12}s` }}
       onPointerMove={handlePointerMove}
     >

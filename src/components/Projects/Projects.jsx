@@ -113,6 +113,7 @@ export default function Projects() {
           {/* Left Column: 3D Stage with Monitor and Phone */}
           <div
             ref={stageRef}
+            data-parallax="stage"
             className={styles.stage}
             onPointerMove={handlePointerMove}
             onPointerLeave={handlePointerLeave}

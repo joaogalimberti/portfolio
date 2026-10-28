@@ -149,21 +149,75 @@
     will-change: transform;
 }
 
-.heroLink:first-child {
+.heroLink:first-child,
+.primaryBtn {
     background: var(--text-color, #0b0b0b);
     color: var(--bg-color, #ffffff);
     border-color: var(--text-color, #0b0b0b);
 }
 
-.heroLink:first-child:hover {
+.heroLink:first-child:hover,
+.primaryBtn:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
-:global([data-theme='dark']) .heroLink:first-child {
+:global([data-theme='dark']) .heroLink:first-child,
+:global([data-theme='dark']) .primaryBtn {
     background: #f0f0f0;
     color: #0b0b0b;
     border-color: #f0f0f0;
+}
+
+.scrollIndicator {
+    position: absolute;
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 38px;
+    border: 1.5px solid var(--text-color, #0b0b0b);
+    border-radius: 12px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+:global([data-theme='dark']) .scrollIndicator {
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.scrollIndicator::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    width: 3px;
+    height: 7px;
+    margin-left: -1.5px;
+    border-radius: 3px;
+    background: var(--text-color, #0b0b0b);
+    animation: scrollBounce 1.6s infinite;
+}
+
+:global([data-theme='dark']) .scrollIndicator::after {
+    background: #ffffff;
+}
+
+@keyframes scrollBounce {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    60% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 0;
+    }
 }
 
 .heroLink:last-child {

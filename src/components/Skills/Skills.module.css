@@ -25,6 +25,10 @@
   will-change: transform;
 }
 
+.track[data-marquee-track] {
+  animation: none !important;
+}
+
 .trackBack {
   animation-direction: reverse;
   animation-duration: 65s;
