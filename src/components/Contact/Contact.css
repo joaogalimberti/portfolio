@@ -1,17 +1,42 @@
-/* Contact */
+/* Contact Section */
 #contact {
-    background: #1a1a1a;
-    border-top-left-radius: 2.5rem;
-    /* Smaller radius for mobile */
-    border-top-right-radius: 2.5rem;
+    position: relative;
+    background: radial-gradient(ellipse 1300px 600px at 50% 0%, #232938 0%, #141822 45%, #0c0e14 100%);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+    border-top-left-radius: clamp(32px, 5vw, 56px);
+    border-top-right-radius: clamp(32px, 5vw, 56px);
+    box-shadow: 0 -30px 90px rgba(10, 18, 35, 0.22);
     color: #ffffff;
-    padding: 4rem 1rem;
-    /* Standard padding */
-    transition: background-color 0.3s ease;
+    padding: clamp(80px, 10vw, 130px) 1rem clamp(60px, 8vw, 100px);
+    margin-top: -30px;
+    z-index: 5;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
 }
 
 [data-theme='dark'] #contact {
-    background: #0d0d0d;
+    background: radial-gradient(ellipse 1300px 600px at 50% 0%, #191e2b 0%, #0d1016 50%, #06070a 100%);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 -30px 90px rgba(0, 0, 0, 0.85);
+}
+
+/* Contact Overhead Spotlight */
+.contactLightBeam {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 420px;
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(255, 255, 255, 0.18) 0%,
+        rgba(160, 195, 255, 0.08) 40%,
+        transparent 75%
+    );
+    filter: blur(35px);
+    pointer-events: none;
+    z-index: 1;
 }
 
 [data-theme='dark'] #contact .section-title {

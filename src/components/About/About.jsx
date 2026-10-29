@@ -4,6 +4,7 @@ import styles from "./About.module.css";
 import AboutDemo from "./AboutDemo";
 
 function Counter({ target, duration = 1.8, plus }) {
+  const { i18n } = useTranslation();
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
@@ -35,7 +36,6 @@ function Counter({ target, duration = 1.8, plus }) {
     const stepAnim = (timestamp) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / totalMs, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * end));
 
@@ -48,9 +48,12 @@ function Counter({ target, duration = 1.8, plus }) {
     return () => cancelAnimationFrame(animId);
   }, [isVisible, target, duration]);
 
+  const isPt = !i18n.language || i18n.language.startsWith("pt");
+  const formattedCount = count.toLocaleString(isPt ? "pt-BR" : "en-US");
+
   return (
     <span ref={elementRef} className={styles.statNumber}>
-      {plus && "+"}{count.toLocaleString()}
+      {plus && "+"}{formattedCount}
     </span>
   );
 }
@@ -66,15 +69,15 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className={styles.aboutSection}>
+    <section id="about" className={styles.aboutSection} aria-labelledby="about-heading">
       <div className="container">
-        {/* Cabeçalho de seção */}
+        {/* Section Header */}
         <div className="section-header reveal">
           <div className="section-number">{t("about.number")}</div>
-          <h2 className="section-title">{t("about.title")}</h2>
+          <h2 id="about-heading" className="section-title">{t("about.title")}</h2>
         </div>
 
-        {/* Grid com Demo slider à esquerda e conteúdo textual à direita */}
+        {/* 2-Column Grid: 3D Stage on Left, Text & Stats on Right */}
         <div className={`${styles.aboutGrid} reveal`}>
           <AboutDemo />
 
@@ -100,10 +103,10 @@ export default function About() {
               aria-expanded={isExpanded}
               aria-controls="about-more"
             >
-              {isExpanded ? t("about.readLess", "Ler menos −") : t("about.readMore", "Ler mais +")}
+              {isExpanded ? t("about.readLess", "Ler menos −") : t("about.readMore", "Read more +")}
             </button>
 
-            {/* Stats */}
+            {/* Stats Row */}
             <div className={styles.statsGrid}>
               {statsData.map((stat, index) => (
                 <div className={styles.statItem} key={index}>
@@ -119,6 +122,10 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {/* Seamless Transition Bridge to Skills */}
+      <div className={styles.bottomBridge} aria-hidden="true" />
+      <div className={styles.sectionConduit} aria-hidden="true" />
     </section>
   );
 }

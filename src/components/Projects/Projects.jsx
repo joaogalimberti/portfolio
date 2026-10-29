@@ -96,12 +96,15 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className={styles.projectsSection}>
+    <section id="projects" className={styles.projectsSection} aria-labelledby="projects-heading">
+      {/* ── Seamless Top Transition Bridge from Pricing ── */}
+      <div className={styles.topBridge} aria-hidden="true" />
+
       <div className="container">
         {/* Header */}
         <div className="section-header reveal">
           <div className="section-number">{t("projects.number")}</div>
-          <h2 className="section-title">{t("projects.title")}</h2>
+          <h2 id="projects-heading" className="section-title">{t("projects.title")}</h2>
         </div>
 
         {/* 2-Column Showcase */}
@@ -110,13 +113,14 @@ export default function Projects() {
           onMouseEnter={() => { isHoveredRef.current = true; }}
           onMouseLeave={() => { isHoveredRef.current = false; }}
         >
-          {/* Left Column: 3D Stage with Monitor and Phone */}
+          {/* Left Column: 3D Stage with Monitor and Phone (Visual Showcase) */}
           <div
             ref={stageRef}
             data-parallax="stage"
             className={styles.stage}
             onPointerMove={handlePointerMove}
             onPointerLeave={handlePointerLeave}
+            aria-hidden="true"
           >
             <div ref={devRef} className={styles.dev}>
               {/* Desktop Monitor — with browser chrome */}
@@ -414,8 +418,12 @@ export default function Projects() {
                 return (
                   <div
                     key={proj.id || index}
+                    id={`proj-heading-${proj.id || index}`}
                     role="button"
                     tabIndex={0}
+                    aria-expanded={isActive}
+                    aria-controls={`proj-content-${proj.id || index}`}
+                    aria-label={`${proj.number} - ${proj.title}`}
                     className={`${styles.pi} ${isActive ? styles.on : ""}`}
                     onClick={() => selectProject(index)}
                     onKeyDown={(e) => {
@@ -428,7 +436,12 @@ export default function Projects() {
                     <small>{proj.number}</small>
                     <h3>{proj.title}</h3>
 
-                    <div className={styles.pd}>
+                    <div
+                      className={styles.pd}
+                      id={`proj-content-${proj.id || index}`}
+                      role="region"
+                      aria-labelledby={`proj-heading-${proj.id || index}`}
+                    >
                       <p>{proj.desc}</p>
 
                       {proj.tags && Array.isArray(proj.tags) && (
@@ -448,6 +461,7 @@ export default function Projects() {
                           rel="noopener noreferrer"
                           className={`${styles.linkBtn} ${styles.primary}`}
                           onClick={(e) => e.stopPropagation()}
+                          aria-label={`${t("projects.live", "Ver ao vivo")}: ${proj.title}`}
                         >
                           <span className={styles.onlineDot} aria-hidden="true" />
                           {t("projects.live", "Ver ao vivo")}
@@ -459,6 +473,7 @@ export default function Projects() {
                           rel="noopener noreferrer"
                           className={styles.linkBtn}
                           onClick={(e) => e.stopPropagation()}
+                          aria-label={`${t("projects.code", "Ver código no GitHub")}: ${proj.title}`}
                         >
                           {GITHUB_SVG}
                           <span>{t("projects.code", "Código")}</span>
@@ -471,6 +486,10 @@ export default function Projects() {
           </div>
         </div>
       </div>
+
+      {/* ── Seamless Bottom Transition Bridge into Contact ── */}
+      <div className={styles.bottomBridge} aria-hidden="true" />
+      <div className={styles.sectionConduit} aria-hidden="true" />
     </section>
   );
 }

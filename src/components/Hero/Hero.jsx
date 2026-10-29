@@ -8,31 +8,43 @@ export default function Hero() {
   const contentRef = useRef(null);
 
   return (
-    <section id="hero" className={styles.hero}>
+    <section id="hero" className={styles.hero} aria-label={t("hero.role", "Desenvolvedor Web Full Stack")}>
       <HeroBackground />
 
       <div ref={contentRef} id="heroTxt" className={styles.heroContent}>
-        <h1 className={styles.heroTitle}>
-          {t("hero.greeting")}{" "}
-          <span className={styles.heroName}>{t("hero.name")},</span>
-          <br />
-          <span className={styles.heroRole}>{t("hero.role")}</span>
-        </h1>
+        <div className={styles.heroBrand}>
+          <h1 className={styles.heroName}>
+            <span className={styles.nameLine}>JOÃO</span>
+            <span className={styles.nameLine}>GALIMBERTI</span>
+          </h1>
+        </div>
 
-        <p className={styles.heroSubtitle}>{t("hero.description")}</p>
+        <p className={styles.heroSubtitle}>
+          {t("hero.role", "Desenvolvedor Web Full Stack")}
+        </p>
 
         <div className={styles.heroActions}>
-          <a href="#projects" className={`${styles.heroLink} ${styles.primaryBtn}`}>
-            <span className={styles.linkText}>{t("hero.viewProjects")}</span>
+          <a
+            href="#projects"
+            className={`${styles.heroLink} ${styles.primaryBtn}`}
+            aria-label={t("hero.viewProjects", "Ver projetos")}
+          >
+            <span className={styles.linkText}>{t("hero.viewProjects", "Ver projetos")}</span>
           </a>
 
-          <a href="#contact" className={styles.heroLink}>
-            <span className={styles.linkText}>{t("hero.contact")}</span>
+          <a
+            href="#contact"
+            className={styles.heroLink}
+            aria-label={t("hero.contact", "Entrar em contato")}
+          >
+            <span className={styles.linkText}>{t("hero.contact", "Entrar em contato")}</span>
           </a>
         </div>
       </div>
 
       <div className={styles.scrollIndicator} id="heroScroll" aria-hidden="true" />
+      <div className={styles.heroBottomBlend} aria-hidden="true" />
+      <div className={styles.heroConnectorLine} aria-hidden="true" />
     </section>
   );
 }

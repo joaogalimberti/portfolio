@@ -1,385 +1,307 @@
 import { useEffect, useRef } from "react";
 import styles from "./HeroBackground.module.css";
 
-const SVGS = {
-  React: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="#61dafb" strokeWidth="1.1">
-      <ellipse cx="12" cy="12" rx="10" ry="4" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
-      <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
-      <circle cx="12" cy="12" r="1.8" fill="#61dafb" />
-    </svg>
-  ),
-  TypeScript: (
-    <svg viewBox="0 0 24 24">
-      <rect x="2" y="2" width="20" height="20" rx="3" fill="#3178c6" />
-      <text x="12" y="17" fontSize="10" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="Inter,sans-serif">TS</text>
-    </svg>
-  ),
-  "Node.js": (
-    <svg viewBox="0 0 24 24">
-      <path d="M12 2l9 5v10l-9 5-9-5V7z" fill="#5fa04e" />
-      <text x="12" y="15.5" fontSize="8" fontWeight="700" fill="#fff" textAnchor="middle" fontFamily="Inter,sans-serif">JS</text>
-    </svg>
-  ),
-  PostgreSQL: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="#336791" strokeWidth="1.6">
-      <ellipse cx="12" cy="6" rx="8" ry="3" />
-      <path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" />
-    </svg>
-  ),
-  "Next.js": (
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="10" fill="#111" />
-      <path d="M9 8v8M9 8l7 9M16 8v5" stroke="#fff" strokeWidth="1.6" fill="none" />
-    </svg>
-  ),
-  Docker: (
-    <svg viewBox="0 0 24 24" fill="#2496ed">
-      <rect x="4" y="9" width="3" height="3" />
-      <rect x="8" y="9" width="3" height="3" />
-      <rect x="12" y="9" width="3" height="3" />
-      <rect x="8" y="5.5" width="3" height="3" />
-      <rect x="12" y="5.5" width="3" height="3" />
-      <path d="M2 13h18c1-1 2-1 2.5-2-1-.5-2-.3-2.5.3-.3-1-1-1.5-1.5-1.8C18 11 18 13 17 15c-2 4-6 5-9 5-3 0-5-2-6-7z" />
-    </svg>
-  ),
-  Git: (
-    <svg viewBox="0 0 24 24">
-      <rect x="4.5" y="4.5" width="15" height="15" rx="2" transform="rotate(45 12 12)" fill="#f05032" />
-      <g stroke="#fff" strokeWidth="1.5" fill="#fff">
-        <path d="M9 9l5 3M9 9v7" fill="none" />
-        <circle cx="9" cy="9" r="1.6" />
-        <circle cx="14" cy="12" r="1.6" />
-        <circle cx="9" cy="16" r="1.6" />
-      </g>
-    </svg>
-  ),
-  Tailwind: (
-    <svg viewBox="0 0 24 24" fill="#38bdf8">
-      <path d="M12 6c-2.7 0-4.4 1.3-5 4 1-1.3 2.2-1.8 3.5-1.5.8.2 1.3.7 1.9 1.3C13.4 10.8 14.5 12 17 12c2.7 0 4.4-1.3 5-4-1 1.3-2.2 1.8-3.5 1.5-.8-.2-1.3-.7-1.9-1.3C15.6 7.2 14.5 6 12 6zM7 12c-2.7 0-4.4 1.3-5 4 1-1.3 2.2-1.8 3.5-1.5.8.2 1.3.7 1.9 1.3C8.4 16.8 9.5 18 12 18c2.7 0 4.4-1.3 5-4-1 1.3-2.2 1.8-3.5 1.5-.8-.2-1.3-.7-1.9-1.3C10.6 13.2 9.5 12 7 12z" />
-    </svg>
-  ),
-};
+const VS_SOURCE = `
+attribute vec2 a_position;
+void main() {
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}
+`;
 
-const NODES_DATA = [
-  ["React", 62, 22],
-  ["TypeScript", 82, 18],
-  ["Node.js", 70, 48],
-  ["PostgreSQL", 90, 46],
-  ["Next.js", 54, 70],
-  ["Docker", 78, 76],
-  ["Git", 92, 78],
-  ["Tailwind", 46, 38],
-  ["Node.js", 36, 84],
-];
+const FS_SOURCE = `
+precision highp float;
+uniform vec2 u_resolution;
+uniform float u_time;
+uniform vec2 u_mouse;
+uniform float u_dark;
 
-const EDGES_DATA = [
-  [0, 1], [0, 2], [1, 3], [2, 3], [2, 4], [4, 5],
-  [5, 6], [3, 6], [0, 7], [7, 2], [4, 8], [7, 4]
-];
+// Procedural hash for subtle organic microstructure
+float hash(vec2 p) {
+  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+}
 
-function rng(a) {
-  return () => {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+float noise(vec2 p) {
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  return mix(
+    mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
+    mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
+    u.y
+  );
+}
+
+// Procedural height field for calm, rolling dunes & silk waves
+float getDuneHeight(vec2 p, float t) {
+  // Diagonal orientation (~28 deg) matching the reference aesthetic
+  float c = 0.88;
+  float s = 0.47;
+  vec2 rp = vec2(c * p.x - s * p.y, s * p.x + c * p.y);
+
+  // Very calm, gentle progression
+  float slowT = t * 0.12;
+
+  // Primary rolling ridge
+  float w1 = sin(rp.x * 1.5 + slowT * 0.8 + sin(rp.y * 1.1) * 0.65);
+  // Secondary crossing soft dune
+  float w2 = cos(rp.y * 1.7 - slowT * 0.5 + sin(rp.x * 0.95) * 0.5) * 0.6;
+  // Tertiary silk fold
+  float w3 = sin((rp.x + rp.y) * 2.1 + slowT * 0.4) * 0.35;
+  // Subtle organic texture
+  float n = noise(rp * 2.8 + slowT * 0.18) * 0.22;
+
+  return w1 + w2 + w3 + n;
+}
+
+void main() {
+  vec2 st = gl_FragCoord.xy / u_resolution.xy;
+  vec2 p = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / min(u_resolution.x, u_resolution.y);
+
+  // Subtle mouse drift
+  vec2 m = (u_mouse - 0.5) * 0.2;
+  p += m;
+
+  // Normal calculation via finite differences
+  float eps = 0.0035;
+  float h  = getDuneHeight(p, u_time);
+  float hx = getDuneHeight(p + vec2(eps, 0.0), u_time);
+  float hy = getDuneHeight(p + vec2(0.0, eps), u_time);
+
+  vec3 normal = normalize(vec3((hx - h) / eps, (hy - h) / eps, 1.45));
+
+  // Key light from top-left
+  vec3 lightDir = normalize(vec3(-0.45, 0.75, 0.8));
+  vec3 viewDir = vec3(0.0, 0.0, 1.0);
+
+  // Smooth diffuse lighting
+  float diff = dot(normal, lightDir) * 0.5 + 0.5;
+
+  // Specular sheen (velvety silk / sand glint)
+  vec3 halfVec = normalize(lightDir + viewDir);
+  float spec = pow(max(dot(normal, halfVec), 0.0), 9.0) * 0.22;
+
+  // Valley ambient occlusion
+  float ao = smoothstep(-1.9, 1.9, h);
+
+  // Light theme: white sand dunes / silk with soft natural shadows
+  vec3 lightBase = vec3(0.97, 0.975, 0.985);
+  vec3 lightShadow = vec3(0.78, 0.81, 0.85);
+  vec3 lightHighlight = vec3(1.0, 1.0, 1.0);
+
+  vec3 lightCol = mix(lightShadow, lightBase, diff);
+  lightCol = mix(lightCol, lightHighlight, spec);
+  lightCol *= (0.76 + 0.24 * ao);
+
+  // Dark theme: deep charcoal & obsidian dunes
+  vec3 darkBase = vec3(0.085, 0.095, 0.125);
+  vec3 darkShadow = vec3(0.045, 0.05, 0.065);
+  vec3 darkHighlight = vec3(0.25, 0.28, 0.36);
+
+  vec3 darkCol = mix(darkShadow, darkBase, diff);
+  darkCol = mix(darkCol, darkHighlight, spec * 1.6);
+  darkCol *= (0.65 + 0.35 * ao);
+
+  // Blend light and dark themes
+  vec3 finalColor = mix(lightCol, darkCol, u_dark);
+
+  // Delicate vignette
+  float vig = 1.0 - 0.15 * length(st - 0.5);
+  finalColor *= vig;
+
+  gl_FragColor = vec4(finalColor, 1.0);
+}
+`;
+
+function createShader(gl, type, source) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.warn("Shader compile error:", gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
 }
 
 export default function HeroBackground() {
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
-  const nodeElsRef = useRef([]);
 
   useEffect(() => {
     const container = containerRef.current;
-    const cv = canvasRef.current;
-    if (!container || !cv) return;
-
-    const ctx = cv.getContext("2d");
-    if (!ctx) return;
+    const canvas = canvasRef.current;
+    if (!container || !canvas) return;
 
     let animId;
-    let mx = -999;
-    let my = -999;
-    let W = 0;
-    let H = 0;
-    let dpr = 1;
-    let V = [];
-    let Ed = [];
-    let Adj = [];
-    let Pl = [];
-    let last = performance.now();
+    let gl = null;
+    let program = null;
+    let buffer = null;
+    let isWebGL = false;
 
-    const getColors = () => {
-      const isDark = document.body.dataset.theme === "dark";
-      return isDark ? "130,175,255" : "45,60,90";
+    try {
+      gl =
+        canvas.getContext("webgl", { antialias: true, powerPreference: "low-power", depth: false }) ||
+        canvas.getContext("experimental-webgl");
+    } catch {
+      gl = null;
+    }
+
+    let targetMouseX = 0.5;
+    let targetMouseY = 0.5;
+    let currentMouseX = 0.5;
+    let currentMouseY = 0.5;
+    let currentDark = document.body.dataset.theme === "dark" || document.documentElement.getAttribute("data-theme") === "dark" ? 1.0 : 0.0;
+    let targetDark = currentDark;
+
+    const checkTheme = () => {
+      const isDark =
+        document.body.dataset.theme === "dark" ||
+        document.documentElement.getAttribute("data-theme") === "dark";
+      targetDark = isDark ? 1.0 : 0.0;
     };
 
-    const build = () => {
-      dpr = window.devicePixelRatio || 1;
-      W = container.clientWidth;
-      H = container.clientHeight;
-      if (W === 0 || H === 0) return;
+    const themeObserver = new MutationObserver(checkTheme);
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ["data-theme"] });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
-      cv.width = W * dpr;
-      cv.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      const r = rng(7);
-      const cs = W < 700 ? 85 : 105;
-      V = [];
-      Pl = [];
-
-      for (let y = -cs / 2; y < H + cs; y += cs) {
-        for (let x = -cs / 2; x < W + cs; x += cs) {
-          V.push({
-            x: x + r() * cs,
-            y: y + r() * cs,
-            g: 0,
-            r: 1 + r() * 0.9,
-            t: null,
-          });
-        }
-      }
-
-      NODES_DATA.forEach(([, x, y], i) => {
-        V.push({
-          x: (x / 100) * W,
-          y: (y / 100) * H,
-          g: 0,
-          r: 3,
-          t: nodeElsRef.current[i] || null,
-        });
-      });
-
-      V.forEach((v) => {
-        v.bx = v.x;
-        v.by = v.y;
-        v.ox = 0;
-        v.oy = 0;
-      });
-
-      const set = new Set();
-      Ed = [];
-      Adj = V.map(() => []);
-
-      const add = (a, b) => {
-        if (a === b) return;
-        const k = a < b ? `${a}-${b}` : `${b}-${a}`;
-        if (set.has(k)) return;
-        set.add(k);
-        Ed.push([a, b]);
-        Adj[a].push(Ed.length - 1);
-        Adj[b].push(Ed.length - 1);
-      };
-
-      V.forEach((v, i) => {
-        const d = V.map((u, j) => [j, (u.x - v.x) ** 2 + (u.y - v.y) ** 2]).sort((p, q) => p[1] - q[1]);
-        const n = v.t ? 5 : 3;
-        for (let m = 1; m <= n; m++) {
-          if (d[m]) add(i, d[m][0]);
-        }
-      });
-
-      const o = V.length - NODES_DATA.length;
-      EDGES_DATA.forEach(([a, b]) => {
-        add(o + a, o + b);
-      });
-    };
-
-    const spawn = (n) => {
-      const l = Adj[n];
-      if (!l || !l.length || Pl.length > 70) return;
-      const e = l[Math.floor(Math.random() * l.length)];
-      const [a, b] = Ed[e];
-      Pl.push({
-        e,
-        from: a === n ? a : b,
-        to: a === n ? b : a,
-        t: 0,
-        sp: 0.14 + Math.random() * 0.2,
-      });
-    };
-
+    // Handle mouse move
     const onPointerMove = (e) => {
       const r = container.getBoundingClientRect();
-      mx = e.clientX - r.left;
-      my = e.clientY - r.top;
+      targetMouseX = (e.clientX - r.left) / (r.width || 1);
+      targetMouseY = (e.clientY - r.top) / (r.height || 1);
     };
 
     const onPointerLeave = () => {
-      mx = -999;
-      my = -999;
+      targetMouseX = 0.5;
+      targetMouseY = 0.5;
     };
 
-    container.addEventListener("pointermove", onPointerMove);
-    container.addEventListener("pointerleave", onPointerLeave);
+    container.addEventListener("pointermove", onPointerMove, { passive: true });
+    container.addEventListener("pointerleave", onPointerLeave, { passive: true });
 
-    const resizeObserver = new ResizeObserver(build);
+    // Check prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (gl) {
+      const vs = createShader(gl, gl.VERTEX_SHADER, VS_SOURCE);
+      const fs = createShader(gl, gl.FRAGMENT_SHADER, FS_SOURCE);
+
+      if (vs && fs) {
+        program = gl.createProgram();
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+
+        if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          isWebGL = true;
+          gl.useProgram(program);
+
+          // Fullscreen quad
+          buffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+          gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+            gl.STATIC_DRAW
+          );
+
+          const posLoc = gl.getAttribLocation(program, "a_position");
+          gl.enableVertexAttribArray(posLoc);
+          gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+        }
+      }
+    }
+
+    const resLoc = isWebGL ? gl.getUniformLocation(program, "u_resolution") : null;
+    const timeLoc = isWebGL ? gl.getUniformLocation(program, "u_time") : null;
+    const mouseLoc = isWebGL ? gl.getUniformLocation(program, "u_mouse") : null;
+    const darkLoc = isWebGL ? gl.getUniformLocation(program, "u_dark") : null;
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = container.clientWidth;
+      height = container.clientHeight;
+      if (width === 0 || height === 0) return;
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+
+      if (isWebGL && gl) {
+        gl.viewport(0, 0, canvas.width, canvas.height);
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
-    build();
+    resize();
 
-    const frame = (now) => {
-      const dt = Math.min(0.05, (now - last) / 1000);
-      last = now;
-      ctx.clearRect(0, 0, W, H);
-      const COL = getColors();
+    const startTime = performance.now();
 
-      const R = 170;
-      const near = [];
+    // 2D Canvas Fallback if WebGL isn't supported
+    const ctx2d = !isWebGL ? canvas.getContext("2d") : null;
 
-      V.forEach((v) => {
-        const dx = mx - v.bx;
-        const dy = my - v.by;
-        const d = Math.hypot(dx, dy);
-        let tx = 0;
-        let ty = 0;
+    const render = (now) => {
+      const elapsed = (now - startTime) / 1000;
+      const t = prefersReducedMotion ? 0 : elapsed;
 
-        if (d < R) {
-          const k = (Math.pow(1 - d / R, 2) * (v.t ? 26 : 38)) / (d || 1);
-          tx = dx * k;
-          ty = dy * k;
-          near.push(v);
-        }
+      // Smooth mouse lerp
+      currentMouseX += (targetMouseX - currentMouseX) * 0.04;
+      currentMouseY += (targetMouseY - currentMouseY) * 0.04;
 
-        const f = Math.min(1, dt * 3);
-        v.ox += (tx - v.ox) * f;
-        v.oy += (ty - v.oy) * f;
-        v.x = v.bx + v.ox;
-        v.y = v.by + v.oy;
+      // Smooth dark mode transition
+      currentDark += (targetDark - currentDark) * 0.08;
 
-        if (v.t) {
-          v.t.style.translate = `${v.ox.toFixed(1)}px ${v.oy.toFixed(1)}px`;
-        }
-      });
-
-      // Background mesh lines
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = `rgba(${COL}, 0.045)`;
-      ctx.beginPath();
-      Ed.forEach(([a, b]) => {
-        if (V[a] && V[b]) {
-          ctx.moveTo(V[a].x, V[a].y);
-          ctx.lineTo(V[b].x, V[b].y);
-        }
-      });
-      ctx.stroke();
-
-      // Mouse interactive constellation web
-      near.forEach((v) => {
-        const d = Math.hypot(mx - v.x, my - v.y);
-        ctx.strokeStyle = `rgba(${COL}, ${0.1 * (1 - d / R)})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(mx, my);
-        ctx.lineTo(v.x, v.y);
-        ctx.stroke();
-        v.g = Math.max(v.g, 0.3 * (1 - d / R));
-      });
-
-      // Spawn pulses along network
-      if (Math.random() < dt * 3) {
-        const target = Math.random() < 0.3
-          ? V.length - 1 - Math.floor(Math.random() * NODES_DATA.length)
-          : Math.floor(Math.random() * V.length);
-        spawn(target);
-      }
-
-      for (let i = Pl.length - 1; i >= 0; i--) {
-        const p = Pl[i];
-        const A = V[p.from];
-        const B = V[p.to];
-        if (!A || !B) {
-          Pl.splice(i, 1);
-          continue;
-        }
-
-        const len = Math.hypot(B.x - A.x, B.y - A.y) || 1;
-        p.t += (dt * p.sp * 200) / len;
-
-        if (p.t >= 1) {
-          B.g = 1;
-          if (B.t) B.g = 1;
-          Pl.splice(i, 1);
-          const c = Math.random();
-          if (c < 0.8) spawn(p.to);
-          if (c < 0.3) spawn(p.to);
-          continue;
-        }
-
-        const hx = A.x + (B.x - A.x) * p.t;
-        const hy = A.y + (B.y - A.y) * p.t;
-        const tl = Math.min(p.t, 45 / len);
-        const tx = A.x + (B.x - A.x) * (p.t - tl);
-        const ty = A.y + (B.y - A.y) * (p.t - tl);
-        const f = (Math.sin(Math.PI * p.t) * 0.9 + 0.1) * (B.t ? Math.min(1, (1 - p.t) / 0.3) : 1);
-
-        const g = ctx.createLinearGradient(tx, ty, hx, hy);
-        g.addColorStop(0, `rgba(${COL}, 0)`);
-        g.addColorStop(1, `rgba(${COL}, ${f * 0.4})`);
-        ctx.strokeStyle = g;
-        ctx.lineWidth = 1.1;
-        ctx.beginPath();
-        ctx.moveTo(tx, ty);
-        ctx.lineTo(hx, hy);
-        ctx.stroke();
-
-        ctx.fillStyle = `rgba(${COL}, ${f * 0.55})`;
-        ctx.beginPath();
-        ctx.arc(hx, hy, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // Vertices / dots and tech node glowing halo
-      V.forEach((v) => {
-        v.g = Math.max(0, v.g - dt * 0.6);
-        if (!v.t) {
-          ctx.fillStyle = `rgba(${COL}, ${0.08 + v.g * 0.35})`;
-          ctx.beginPath();
-          ctx.arc(v.x, v.y, v.r + v.g * 1.3, 0, Math.PI * 2);
-          ctx.fill();
+      if (isWebGL && gl && program) {
+        gl.useProgram(program);
+        gl.uniform2f(resLoc, canvas.width, canvas.height);
+        gl.uniform1f(timeLoc, t);
+        gl.uniform2f(mouseLoc, currentMouseX, currentMouseY);
+        gl.uniform1f(darkLoc, currentDark);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+      } else if (ctx2d) {
+        // Fallback 2D animated dunes
+        ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+        const grad = ctx2d.createLinearGradient(0, 0, canvas.width, canvas.height);
+        if (currentDark > 0.5) {
+          grad.addColorStop(0, "#08090c");
+          grad.addColorStop(1, "#151821");
         } else {
-          v.t.style.setProperty("--g", (v.g * v.g * 0.6).toFixed(3));
+          grad.addColorStop(0, "#ffffff");
+          grad.addColorStop(1, "#e6eaf0");
         }
-      });
+        ctx2d.fillStyle = grad;
+        ctx2d.fillRect(0, 0, canvas.width, canvas.height);
+      }
 
-      animId = requestAnimationFrame(frame);
+      animId = requestAnimationFrame(render);
     };
 
-    animId = requestAnimationFrame(frame);
+    animId = requestAnimationFrame(render);
 
     return () => {
       cancelAnimationFrame(animId);
       resizeObserver.disconnect();
+      themeObserver.disconnect();
       container.removeEventListener("pointermove", onPointerMove);
       container.removeEventListener("pointerleave", onPointerLeave);
+
+      if (isWebGL && gl) {
+        if (buffer) gl.deleteBuffer(buffer);
+        if (program) gl.deleteProgram(program);
+      }
     };
   }, []);
 
   return (
     <div ref={containerRef} className={styles.heroBg} aria-hidden="true">
       <canvas ref={canvasRef} className={styles.canvas} />
-      <div className={styles.nodes}>
-        {NODES_DATA.map(([name, x, y], index) => (
-          <div
-            key={`${name}-${index}`}
-            ref={(el) => (nodeElsRef.current[index] = el)}
-            className={styles.node}
-            style={{
-              left: `${x}%`,
-              top: `${y}%`,
-              animationDelay: `${-index * 0.9}s`,
-            }}
-          >
-            {SVGS[name]}
-            <span>{name}</span>
-          </div>
-        ))}
-      </div>
+      {/* Subtle overlay for optimal text contrast */}
+      <div className={styles.contrastOverlay} />
     </div>
   );
 }

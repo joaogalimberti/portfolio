@@ -1,7 +1,6 @@
-/* Footer */
+/* Footer — matches Contact section bottom color seamlessly */
 .footer {
-    background: #1a1a1a;
-    /* Match Contact Light Mode */
+    background: #0c0e14;
     color: rgba(255, 255, 255, 0.6);
     padding: 3rem 2rem;
     text-align: center;
@@ -10,8 +9,7 @@
 }
 
 [data-theme='dark'] .footer {
-    background: #0d0d0d;
-    /* Match Contact Dark Mode */
+    background: #06070a;
     border-top-color: rgba(255, 255, 255, 0.02);
 }
 

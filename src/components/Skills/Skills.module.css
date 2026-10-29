@@ -1,180 +1,717 @@
-/* Skills Section */
+/* Skills Section
+   Realistic 3D Isometric Stacked Layers with Luxury Glassmorphism & Depth */
+
 .skillsSection {
   position: relative;
-  padding: clamp(72px, 10vw, 130px) 0;
+  padding: clamp(80px, 10vw, 140px) 0 clamp(90px, 11vw, 150px);
   overflow: hidden;
+  background: linear-gradient(180deg, #f1f5f8 0%, #f8fafb 100%);
+  transition: background 0.4s ease;
 }
 
-.marqueeWrapper {
-  margin-top: clamp(28px, 4vw, 48px);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+:global([data-theme='dark']) .skillsSection {
+  background: linear-gradient(180deg, #0c0e13 0%, #111318 100%);
 }
 
-.marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+/* Seamless Top Bridge from About */
+.topBridge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, #f1f5f8 0%, rgba(241, 245, 248, 0.4) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
-.track {
-  display: flex;
-  width: max-content;
-  animation: marqueeScroll 55s linear infinite;
-  will-change: transform;
+:global([data-theme='dark']) .topBridge {
+  background: linear-gradient(to bottom, #0c0e13 0%, rgba(12, 14, 19, 0.4) 60%, transparent 100%);
 }
 
-.track[data-marquee-track] {
-  animation: none !important;
+/* Seamless Bottom Bridge into Pricing */
+.bottomBridge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(248, 250, 251, 0.7) 60%, #f8fafb 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
-.trackBack {
-  animation-direction: reverse;
-  animation-duration: 65s;
+:global([data-theme='dark']) .bottomBridge {
+  background: linear-gradient(to bottom, transparent 0%, rgba(17, 19, 24, 0.7) 60%, #111318 100%);
 }
 
-.marquee:hover .track {
-  animation-play-state: paused;
+/* Connecting Conduit */
+.sectionConduit {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 1.5px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.28) 50%, transparent 100%);
+  border-radius: 99px;
+  z-index: 10;
+  pointer-events: none;
 }
 
-@keyframes marqueeScroll {
-  to {
-    transform: translateX(-33.333333%);
+:global([data-theme='dark']) .sectionConduit {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+}
+
+/* =============================================
+   Studio Overhead Lighting Beams
+   ============================================= */
+.studioLightBeam {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1240px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.75) 28%,
+    rgba(235, 244, 255, 0.22) 58%,
+    transparent 80%
+  );
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+:global([data-theme='dark']) .studioLightBeam {
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(160, 195, 255, 0.1) 35%,
+    transparent 75%
+  );
+}
+
+.studioLightSpot {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 780px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(240, 248, 255, 0.6) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+:global([data-theme='dark']) .studioLightSpot {
+  background: radial-gradient(circle, rgba(140, 180, 240, 0.08) 0%, transparent 70%);
+}
+
+/* Subtitle under title */
+.sectionSubtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: #556274;
+  margin-top: 12px;
+  max-width: 620px;
+  line-height: 1.55;
+}
+
+:global([data-theme='dark']) .sectionSubtitle {
+  color: #9cb0c8;
+}
+
+/* =============================================
+   Floating Monochromatic 3D Elements
+   ============================================= */
+.monochrome3D {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  transition: transform 0.6s ease;
+}
+
+.floatCube {
+  top: 10%;
+  left: -2%;
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.floatOcta {
+  top: 45%;
+  right: -1%;
+  animation: floatSlow 9s ease-in-out infinite reverse;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(3deg);
   }
 }
 
-/* Individual Skill Item */
-.skillItem {
-  margin-right: 34px;
-  padding: 16px 0;
+/* =============================================
+   Isometric Stage & Canvas
+   ============================================= */
+.isometricStage {
+  position: relative;
+  width: 100%;
+  max-width: 1220px;
+  margin: 50px auto 0;
+  padding: 40px 10px 80px;
+  perspective: 1600px;
+  transform-style: preserve-3d;
+}
+
+.stackCanvas {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  user-select: none;
+  gap: 32px;
+  position: relative;
+  z-index: 4;
+  transform: rotateX(var(--stage-rx, 0deg)) rotateY(var(--stage-ry, 0deg));
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
 }
 
-.skillOrb {
-  position: relative;
-  width: 104px;
-  height: 104px;
+/* =============================================
+   Layer Row: Left Callout + Isometric Slab + Right Flow
+   ============================================= */
+.layerRow {
   display: grid;
-  place-items: center;
-  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.skillOrb::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.2) 70%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  -webkit-mask-image: radial-gradient(circle, #000 52%, transparent 71%);
-  mask-image: radial-gradient(circle, #000 52%, transparent 71%);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-}
-
-:global([data-theme='dark']) .skillOrb::before {
-  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.03) 70%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-.skillOrb::after {
-  content: "";
-  position: absolute;
-  inset: -22px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(110, 140, 210, 0.28), transparent 65%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.skillIcon {
+  grid-template-columns: 240px 1fr 220px;
+  align-items: center;
+  gap: 24px;
   position: relative;
-  z-index: 1;
-  width: 44px;
-  height: 44px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+@media (max-width: 1100px) {
+  .layerRow {
+    grid-template-columns: 200px 1fr 180px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .layerRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .rightCallout {
+    display: none;
+  }
+}
+
+/* Hover elevation per row */
+.layerRow:hover {
+  transform: translateZ(18px) scale(1.01);
+  z-index: 12;
+}
+
+/* =============================================
+   Left Callout Label
+   ============================================= */
+.leftCallout {
   display: flex;
   align-items: center;
-  justify-content: center;
-  filter: grayscale(1);
-  opacity: 0.45;
-  transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  gap: 12px;
+  position: relative;
 }
 
-.skillIcon img,
-.skillIcon svg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  user-select: none;
+.calloutDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2b3240;
+  box-shadow: 0 0 0 3px rgba(43, 50, 64, 0.15);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+:global([data-theme='dark']) .calloutDot {
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.layerRow:hover .calloutDot {
+  transform: scale(1.3);
+  background: #0284c7;
+}
+
+.calloutLine {
+  width: 24px;
+  height: 1.5px;
+  background: linear-gradient(to right, #2b3240, rgba(43, 50, 64, 0.2));
+  flex-shrink: 0;
+}
+
+:global([data-theme='dark']) .calloutLine {
+  background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0.2));
+}
+
+.calloutContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calloutBadge {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+:global([data-theme='dark']) .calloutBadge {
+  color: #94a3b8;
+}
+
+.calloutTitle {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+:global([data-theme='dark']) .calloutTitle {
+  color: #f1f5f9;
+}
+
+.calloutDesc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+:global([data-theme='dark']) .calloutDesc {
+  color: #94a3b8;
+}
+
+/* =============================================
+   3D Isometric Glass Slab Card
+   ============================================= */
+.slabWrapper {
+  position: relative;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.slabCard {
+  position: relative;
+  border-radius: 20px;
+  padding: 22px 26px;
+  overflow: hidden;
+  /* Glassmorphism Luxury Surface */
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(247, 250, 254, 0.75) 50%,
+    rgba(238, 245, 255, 0.65) 100%
+  );
+  backdrop-filter: blur(28px) saturate(1.7);
+  -webkit-backdrop-filter: blur(28px) saturate(1.7);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-top: 2px solid #ffffff;
+  border-left: 1.5px solid rgba(255, 255, 255, 0.95);
+  /* 3D Realistic Soft Ambient + Rim Shadows */
+  box-shadow:
+    0 4px 6px rgba(15, 23, 42, 0.03),
+    0 12px 24px -6px rgba(15, 23, 42, 0.08),
+    0 28px 48px -12px rgba(15, 23, 42, 0.08),
+    inset 0 1.5px 1px #ffffff,
+    inset 0 -1px 1px rgba(0, 0, 0, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: rotateX(6deg) rotateY(-2deg);
+  transform-style: preserve-3d;
+}
+
+:global([data-theme='dark']) .slabCard {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 31, 44, 0.82) 0%,
+    rgba(18, 21, 30, 0.72) 100%
+  );
+  backdrop-filter: blur(28px) saturate(1.5);
+  -webkit-backdrop-filter: blur(28px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.4),
+    0 20px 40px -8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.layerRow:hover .slabCard {
+  transform: rotateX(2deg) rotateY(-1deg) translateY(-4px);
+  box-shadow:
+    0 8px 16px rgba(15, 23, 42, 0.05),
+    0 20px 36px -6px rgba(15, 23, 42, 0.12),
+    0 40px 70px -12px rgba(15, 23, 42, 0.12),
+    inset 0 2px 2px #ffffff;
+  border-color: rgba(255, 255, 255, 1);
+}
+
+:global([data-theme='dark']) .layerRow:hover .slabCard {
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.5),
+    0 30px 60px -8px rgba(0, 0, 0, 0.75),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+/* Top Sheen Line */
+.slabTopSheen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 30%, rgba(255, 255, 255, 0.9) 70%, transparent 100%);
   pointer-events: none;
+}
+
+/* 3D Extruded Bottom Edge */
+.slabEdge3D {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.08) 100%);
+  border-radius: 0 0 20px 20px;
+  pointer-events: none;
+}
+
+:global([data-theme='dark']) .slabEdge3D {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* Ambient Radial Glow on the slab */
+.slabGlow {
+  position: absolute;
+  top: -40%;
+  left: 20%;
+  width: 60%;
+  height: 140%;
+  filter: blur(50px);
+  pointer-events: none;
+  opacity: 0.65;
+  transition: opacity 0.4s ease;
+}
+
+.layerRow:hover .slabGlow {
+  opacity: 1;
+}
+
+/* Header inside the slab */
+.slabHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  position: relative;
+  z-index: 2;
+}
+
+:global([data-theme='dark']) .slabHeader {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.slabTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slabPill {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: rgba(15, 23, 42, 0.06);
+  color: #334155;
+}
+
+:global([data-theme='dark']) .slabPill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+}
+
+.slabTitle {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+:global([data-theme='dark']) .slabTitle {
+  color: #f8fafc;
+}
+
+.slabCounter {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+:global([data-theme='dark']) .slabCounter {
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* =============================================
+   Badges Grid on Slab
+   ============================================= */
+.slabBadgesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+/* 3D Neumorphic / Claymorphic Pill Tile */
+.skillBadge3D {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffffff 0%, #f4f7fb 100%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 2px 4px rgba(15, 23, 42, 0.04),
+    0 6px 14px -3px rgba(15, 23, 42, 0.07),
+    inset 0 1px 1px #ffffff,
+    inset 0 -1px 1px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+  position: relative;
+  user-select: none;
+}
+
+:global([data-theme='dark']) .skillBadge3D {
+  background: linear-gradient(135deg, #242b3b 0%, #1a1e2a 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.skillBadge3D:hover {
+  transform: translateY(-3px) scale(1.04);
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow:
+    0 6px 18px -2px rgba(15, 23, 42, 0.12),
+    0 12px 24px -4px rgba(15, 23, 42, 0.08),
+    inset 0 1.5px 1px #ffffff;
+}
+
+:global([data-theme='dark']) .skillBadge3D:hover {
+  background: #2b3347;
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.55),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.2);
+}
+
+.featuredBadge {
+  border-color: rgba(2, 132, 199, 0.25);
+  background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
+}
+
+:global([data-theme='dark']) .featuredBadge {
+  border-color: rgba(56, 189, 248, 0.3);
+  background: linear-gradient(135deg, #252f44 0%, #1c2232 100%);
+}
+
+.badgeTopSheen {
+  position: absolute;
+  top: 0;
+  left: 6px;
+  right: 6px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+  pointer-events: none;
+}
+
+.badgeIconWrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  background: rgba(243, 247, 252, 0.9);
+  box-shadow: inset 0 1px 1.5px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+  padding: 4px;
+}
+
+:global([data-theme='dark']) .badgeIconWrapper {
+  background: rgba(15, 20, 30, 0.7);
+  box-shadow: inset 0 1px 1.5px rgba(0, 0, 0, 0.5);
+}
+
+.skillIconImg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  /* Realistic 3D Icon Extrusion Depth */
+  filter:
+    drop-shadow(0 1px 1px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 3px 6px rgba(12, 23, 44, 0.14));
+  transition: transform 0.25s ease;
+}
+
+.skillBadge3D:hover .skillIconImg {
+  transform: scale(1.12);
 }
 
 .fallbackIcon {
-  font-family: var(--font-display, inherit);
+  font-family: var(--font-heading, sans-serif);
+  font-size: 11px;
   font-weight: 700;
-  font-size: 14px;
-  color: var(--text-color);
+  color: #3b82f6;
 }
 
-.skillName {
-  font-family: var(--font-main, 'Inter', sans-serif);
-  font-size: 12px;
+.badgeInfo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.badgeName {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+:global([data-theme='dark']) .badgeName {
+  color: #f1f5f9;
+}
+
+.badgeRole {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 10px;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.5);
-  transition: color 0.3s ease;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+:global([data-theme='dark']) .badgeRole {
+  color: #94a3b8;
+}
+
+/* =============================================
+   Right Callout Flow Line
+   ============================================= */
+.rightCallout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   position: relative;
-  z-index: 1;
-  letter-spacing: 0.01em;
 }
 
-:global([data-theme='dark']) .skillName {
-  color: rgba(255, 255, 255, 0.5);
+.flowLine {
+  width: 32px;
+  height: 1.5px;
+  background: linear-gradient(to right, rgba(43, 50, 64, 0.2), #2b3240);
+  flex-shrink: 0;
 }
 
-/* Hover effects */
-.skillItem:hover .skillOrb {
-  transform: scale(1.16) translateY(-4px);
+:global([data-theme='dark']) .flowLine {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.2), #ffffff);
 }
 
-.skillItem:hover .skillOrb::after {
-  opacity: 1;
+.flowArrow {
+  width: 6px;
+  height: 6px;
+  border-top: 1.5px solid #2b3240;
+  border-right: 1.5px solid #2b3240;
+  transform: rotate(45deg);
+  margin-left: -8px;
 }
 
-.skillItem:hover .skillIcon {
-  filter: grayscale(0);
-  opacity: 1;
-  transform: scale(1.1);
+:global([data-theme='dark']) .flowArrow {
+  border-color: #ffffff;
 }
 
-.skillItem:hover .skillName {
-  color: var(--text-color, #0b0b0b);
+.flowText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  color: #475569;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-  .skillOrb {
-    width: 80px;
-    height: 80px;
-  }
-  .skillIcon {
-    width: 34px;
-    height: 34px;
-  }
-  .skillItem {
-    margin-right: 20px;
-  }
+:global([data-theme='dark']) .flowText {
+  color: #cbd5e1;
 }
 
+/* =============================================
+   Studio Floor Ground Contact Shadow Pool
+   ============================================= */
+.studioGroundShadow {
+  width: 78%;
+  height: 48px;
+  margin: 30px auto 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(12, 23, 44, 0.14) 0%,
+    rgba(12, 23, 44, 0.04) 55%,
+    transparent 75%
+  );
+  filter: blur(20px);
+}
+
+:global([data-theme='dark']) .studioGroundShadow {
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.2) 55%,
+    transparent 75%
+  );
+  filter: blur(24px);
+}
+
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  .track {
-    animation: none;
+  .floatCube,
+  .floatOcta {
+    animation: none !important;
+  }
+  .stackCanvas,
+  .layerRow,
+  .slabCard,
+  .skillBadge3D {
+    transition: none !important;
+    transform: none !important;
   }
 }

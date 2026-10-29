@@ -32,19 +32,34 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact">
+    <section id="contact" aria-labelledby="contact-heading">
+      {/* Overhead keylight spotlight beam */}
+      <div className="contactLightBeam" aria-hidden="true" />
+
       <div className="container reveal">
         <div className="section-header">
           <div className="section-number">{t("contact.number")}</div>
-          <h2 className="section-title">{t("contact.title")}</h2>
+          <h2 id="contact-heading" className="section-title">{t("contact.title")}</h2>
         </div>
 
         <div className="contact-grid">
           {contactItems.map((item, index) => (
             <div className="contact-item" key={index}>
-              <a href={item.link} target="_blank" rel="noopener noreferrer">
-                <div className="contact-icon-wrapper">
-                  <img src={item.icon} alt={item.label} className="contact-icon" />
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${item.label}: ${item.value}`}
+              >
+                <div className="contact-icon-wrapper" aria-hidden="true">
+                  <img
+                    src={item.icon}
+                    alt=""
+                    className="contact-icon"
+                    width="32"
+                    height="32"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="contact-info">
                   <span className="contact-label">{item.label}</span>

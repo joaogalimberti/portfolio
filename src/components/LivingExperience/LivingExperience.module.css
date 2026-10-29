@@ -22,28 +22,3 @@
   pointer-events: none;
   will-change: transform;
 }
-
-/* Custom interactive trailing cursor ring */
-.cursorRing {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 36px;
-  height: 36px;
-  margin: -18px 0 0 -18px;
-  border: 1.5px solid #ffffff;
-  border-radius: 50%;
-  mix-blend-mode: difference;
-  pointer-events: none;
-  z-index: 70;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  will-change: transform;
-}
-
-@media (pointer: coarse), (max-width: 768px) {
-  .cursorRing {
-    display: none !important;
-  }
-}
-

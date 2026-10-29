@@ -5,7 +5,13 @@
         "skills": "Skills",
         "pricing": "Pricing",
         "projects": "Projects",
-        "contact": "Contact"
+        "contact": "Contact",
+        "skipToContent": "Skip to main content",
+        "themeLight": "Switch to light mode",
+        "themeDark": "Switch to dark mode",
+        "langSwitch": "Switch language to Portuguese",
+        "openMenu": "Open navigation menu",
+        "closeMenu": "Close navigation menu"
     },
     "hero": {
         "greeting": "Hello, I'm",
@@ -37,7 +43,28 @@
     },
     "skills": {
         "number": "02 | SKILLS",
-        "title": "Core Technologies & Expertise"
+        "title": "Core Technologies & Expertise",
+        "subtitle": "Layered architecture: from visual interface to database & infrastructure.",
+        "layers": {
+            "frontend": "Visual Interface",
+            "frontendDesc": "Design Systems, Component Architecture & Responsiveness",
+            "logic": "Ideation & TypeScript",
+            "logicDesc": "Strict Typing, Business Rules & State Management",
+            "backend": "API & Back-End Logic",
+            "backendDesc": "Microservices, REST Endpoints & Authentication",
+            "database": "Data & Infrastructure",
+            "databaseDesc": "Relational/NoSQL Databases, Docker & Versioning"
+        },
+        "flows": {
+            "flow1": "Visual → Components → Logic",
+            "flow2": "APIs → Rules → Data",
+            "flow3": "Git → Deploy → Database"
+        },
+        "categories": {
+            "frontend": "Front-End",
+            "backend": "Back-End & Database",
+            "tools": "Tools & Others"
+        }
     },
     "pricing": {
         "number": "03 | PRICING",

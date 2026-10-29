@@ -5,7 +5,13 @@
         "skills": "Habilidades",
         "pricing": "Investimento",
         "projects": "Projetos",
-        "contact": "Contato"
+        "contact": "Contato",
+        "skipToContent": "Pular para o conteúdo principal",
+        "themeLight": "Mudar para modo claro",
+        "themeDark": "Mudar para modo escuro",
+        "langSwitch": "Mudar idioma para Inglês",
+        "openMenu": "Abrir menu de navegação",
+        "closeMenu": "Fechar menu de navegação"
     },
     "hero": {
         "greeting": "Olá, eu sou",
@@ -17,7 +23,7 @@
     },
     "about": {
         "number": "01 | SOBRE",
-        "title": "Transformando ideias em interfaces reais",
+        "title": "Transformando ideias em experiências digitais reais",
         "intro": "Olá! Sou João Galimberti, desenvolvedor focado em <b>Front-End</b> e aplicações Web modernas.",
         "text1": "Estou constantemente evoluindo minhas habilidades e aplicando tecnologias atuais para criar interfaces intuitivas e experiências digitais significativas.",
         "text2": "Tenho experiência prática no manejo de dados, desenvolvimento web e ferramentas de análise, sempre buscando entregar projetos organizados, escaláveis e com atenção à performance e usabilidade. Meu objetivo é crescer como Full Stack Developer, aprendendo e contribuindo em projetos reais.",
@@ -37,7 +43,28 @@
     },
     "skills": {
         "number": "02 | HABILIDADES",
-        "title": "Principais Tecnologias & Conhecimentos"
+        "title": "Principais Tecnologias & Conhecimentos",
+        "subtitle": "Arquitetura em camadas: da interface visual ao banco de dados e infraestrutura.",
+        "layers": {
+            "frontend": "Interface Visual",
+            "frontendDesc": "Design System, Componentização & Responsividade",
+            "logic": "Ideação & TypeScript",
+            "logicDesc": "Tipagem Estrita, Regras de Negócio & Arquitetura",
+            "backend": "API & Lógica Back-End",
+            "backendDesc": "Microsserviços, Endpoints REST & Autenticação",
+            "database": "Dados & Infraestrutura",
+            "databaseDesc": "Bancos Relacionais/NoSQL, Docker & Versionamento"
+        },
+        "flows": {
+            "flow1": "Visual → Componentes → Lógica",
+            "flow2": "APIs → Regras → Dados",
+            "flow3": "Git → Deploy → Banco de Dados"
+        },
+        "categories": {
+            "frontend": "Front-End",
+            "backend": "Back-End & Database",
+            "tools": "Tools & Others"
+        }
     },
     "pricing": {
         "number": "03 | INVESTIMENTO",
