@@ -1,3 +1,4 @@
+import { useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./Pricing.module.css";
 
@@ -5,30 +6,70 @@ const PHONE_NUMBER = "5527995059130";
 
 function PricingCard({ plan, isPopular, delayIndex, isOutlineBtn }) {
   const { t } = useTranslation();
+  const cardRef = useRef(null);
+  const targetTiltRef = useRef({ rx: 0, ry: 0, y: 0 });
+  const currTiltRef = useRef({ rx: 0, ry: 0, y: 0 });
+  const animFrameRef = useRef(null);
+  const isHoveredRef = useRef(false);
 
-  const handlePointerMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+  useEffect(() => {
+    const cardEl = cardRef.current;
+    if (!cardEl) return;
+
+    const loop = () => {
+      const drx = targetTiltRef.current.rx - currTiltRef.current.rx;
+      const dry = targetTiltRef.current.ry - currTiltRef.current.ry;
+      const dy = targetTiltRef.current.y - currTiltRef.current.y;
+
+      if (Math.abs(drx) > 0.01 || Math.abs(dry) > 0.01 || Math.abs(dy) > 0.05) {
+        currTiltRef.current.rx += drx * 0.14;
+        currTiltRef.current.ry += dry * 0.14;
+        currTiltRef.current.y += dy * 0.14;
+
+        cardEl.style.transform = `translateY(${currTiltRef.current.y.toFixed(2)}px) rotateX(${currTiltRef.current.rx.toFixed(2)}deg) rotateY(${currTiltRef.current.ry.toFixed(2)}deg)`;
+      } else if (!isHoveredRef.current && (Math.abs(currTiltRef.current.rx) > 0 || Math.abs(currTiltRef.current.y) > 0)) {
+        currTiltRef.current.rx = 0;
+        currTiltRef.current.ry = 0;
+        currTiltRef.current.y = 0;
+        cardEl.style.transform = `translateY(0px) rotateX(0deg) rotateY(0deg)`;
+      }
+
+      animFrameRef.current = requestAnimationFrame(loop);
+    };
+
+    animFrameRef.current = requestAnimationFrame(loop);
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, []);
+
+  const handlePointerMove = useCallback((e) => {
+    if (!cardRef.current) return;
+    isHoveredRef.current = true;
+    const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty("--mx", `${x}px`);
-    e.currentTarget.style.setProperty("--my", `${y}px`);
 
-    // Dynamic 3D tilt tracking cursor
-    const rx = ((y / rect.height - 0.5) * -8).toFixed(2);
-    const ry = (((x / rect.width - 0.5) * 8)).toFixed(2);
-    e.currentTarget.style.setProperty("--rx", `${rx}deg`);
-    e.currentTarget.style.setProperty("--ry", `${ry}deg`);
-  };
+    cardRef.current.style.setProperty("--mx", `${x}px`);
+    cardRef.current.style.setProperty("--my", `${y}px`);
 
-  const handlePointerLeave = (e) => {
-    e.currentTarget.style.setProperty("--rx", "0deg");
-    e.currentTarget.style.setProperty("--ry", "0deg");
-  };
+    targetTiltRef.current.rx = ((y / rect.height - 0.5) * -7);
+    targetTiltRef.current.ry = (((x / rect.width - 0.5) * 7));
+    targetTiltRef.current.y = -8;
+  }, []);
+
+  const handlePointerLeave = useCallback(() => {
+    isHoveredRef.current = false;
+    targetTiltRef.current.rx = 0;
+    targetTiltRef.current.ry = 0;
+    targetTiltRef.current.y = 0;
+  }, []);
 
   const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(plan.message)}`;
 
   return (
     <div
+      ref={cardRef}
       className={`${styles.card} ${isPopular ? styles.popularCard : ""}`}
       data-pricing-card={delayIndex}
       style={{ transitionDelay: `${delayIndex * 0.12}s` }}
